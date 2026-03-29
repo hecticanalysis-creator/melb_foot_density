@@ -3,442 +3,342 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0a0a0a">
-<title>Melbourne Parking</title>
+<title>Melbourne Foot Traffic</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+
 <style>
   :root {
-    --bg:#0a0a0a; --surface:#141414; --surface2:#1c1c1c;
-    --border:rgba(255,255,255,0.08); --text:#f0ede8; --muted:#6b6b6b;
-    --green:#00e676; --green-dim:rgba(0,230,118,0.12);
-    --red:#ff4f4f;   --red-dim:rgba(255,79,79,0.12);
-    --amber:#ffb300; --amber-dim:rgba(255,179,0,0.12);
-    --accent:#e8ff47;
-    --mono:'DM Mono',monospace; --sans:'DM Sans',sans-serif;
-    --r:12px; --rs:8px;
+    --bg:         #0d0f12;
+    --surface:    #161920;
+    --border:     #252830;
+    --amber:      #f5a623;
+    --amber-dim:  rgba(245,166,35,0.15);
+    --red:        #e8453c;
+    --green:      #3ce87a;
+    --muted:      #5a6070;
+    --text:       #e8eaf0;
+    --subtext:    #8890a0;
+    --mono:       'Space Mono', monospace;
+    --sans:       'DM Sans', sans-serif;
   }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;overflow:hidden}
-  #app{display:flex;flex-direction:column;height:100dvh;max-width:480px;margin:0 auto}
-  header{padding:14px 14px 0;flex-shrink:0}
-  .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-  .wordmark{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
-  .live-badge{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--muted)}
-  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-  .stat{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--rs);padding:9px 11px}
-  .stat-label{font-size:10px;font-family:var(--mono);letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:3px}
-  .stat-value{font-size:20px;font-weight:300;font-family:var(--mono);color:var(--text);line-height:1}
-  .stat-value.green{color:var(--green)} .stat-value.red{color:var(--red)}
-  .stat-sub{font-size:10px;color:var(--muted);margin-top:2px;font-family:var(--mono)}
-  .suburb-scroll{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;margin-bottom:8px;scrollbar-width:none}
-  .suburb-scroll::-webkit-scrollbar{display:none}
-  .s-pill{flex-shrink:0;font-size:12px;font-family:var(--mono);padding:5px 11px;border-radius:999px;border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px}
-  .s-pill.active{background:var(--accent);color:#0a0a0a;border-color:var(--accent);font-weight:500}
-  .s-pill:active{transform:scale(.96)}
-  .s-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-  .filter-row{display:flex;gap:6px;margin-bottom:8px}
-  .f-pill{flex:1;text-align:center;font-size:12px;font-family:var(--mono);padding:6px 8px;border-radius:var(--rs);border:0.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s}
-  .f-pill.active.all{background:var(--surface2);color:var(--text);border-color:rgba(255,255,255,.2)}
-  .f-pill.active.free{background:var(--green-dim);color:var(--green);border-color:rgba(0,230,118,.3)}
-  .f-pill.active.occ{background:var(--red-dim);color:var(--red);border-color:rgba(255,79,79,.3)}
-  .f-pill:active{transform:scale(.97)}
-  #map-wrap{flex:1;position:relative;margin:0 14px;border-radius:var(--r);overflow:hidden;border:0.5px solid var(--border);min-height:0}
-  #map{width:100%;height:100%}
-  .leaflet-tile{filter:brightness(.7) saturate(.5) hue-rotate(195deg)}
-  .leaflet-control-zoom{display:none}
-  .leaflet-control-attribution{background:rgba(10,10,10,.75)!important;color:#444!important;font-size:9px!important}
-  .leaflet-control-attribution a{color:#555!important}
-  .leaflet-popup-content-wrapper{background:var(--surface)!important;border:0.5px solid var(--border)!important;border-radius:var(--rs)!important;box-shadow:0 8px 24px rgba(0,0,0,.5)!important;color:var(--text)!important;font-family:var(--mono)!important;font-size:12px!important}
-  .leaflet-popup-tip{background:var(--surface)!important}
-  .leaflet-popup-close-button{color:var(--muted)!important}
-  .map-legend{position:absolute;bottom:10px;left:10px;z-index:10;background:rgba(10,10,10,.8);backdrop-filter:blur(6px);border-radius:var(--rs);padding:7px 10px;display:flex;flex-direction:column;gap:4px;border:0.5px solid var(--border)}
-  .leg-row{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--muted)}
-  .leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-  #sheet{flex-shrink:0;background:var(--surface);border-top:0.5px solid var(--border);border-radius:var(--r) var(--r) 0 0;overflow:hidden;z-index:20}
-  .sheet-handle{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 8px;cursor:pointer;user-select:none}
-  .sheet-grip{width:32px;height:3px;background:var(--border);border-radius:2px;margin-bottom:5px}
-  .sheet-title{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
-  .sheet-toggle{font-size:11px;color:var(--muted);font-family:var(--mono)}
-  #street-list{overflow-y:auto;max-height:200px;padding-bottom:12px}
-  .s-row{display:flex;align-items:center;justify-content:space-between;padding:7px 14px;border-bottom:0.5px solid var(--border)}
-  .s-row:last-child{border-bottom:none}
-  .s-name{font-family:var(--mono);font-size:12px;color:var(--text);margin-bottom:1px}
-  .s-count{font-size:11px;color:var(--muted);font-family:var(--mono)}
-  .s-right{display:flex;align-items:center;gap:8px}
-  .bar{width:50px;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
-  .bar-fill{height:100%;border-radius:2px;transition:width .3s}
-  .pct-label{font-family:var(--mono);font-size:11px;min-width:30px;text-align:right}
-  footer{display:flex;align-items:center;justify-content:space-between;padding:7px 14px 10px;flex-shrink:0;background:var(--surface);gap:8px}
-  .footer-status{font-family:var(--mono);font-size:10px;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .refresh-btn{font-family:var(--mono);font-size:11px;padding:5px 11px;border-radius:999px;border:0.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;flex-shrink:0}
-  .refresh-btn:active{background:var(--surface2);color:var(--text);transform:scale(.96)}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .spinning{animation:spin .7s linear infinite;display:inline-block}
-  #loading{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:999;transition:opacity .4s}
-  #loading.hidden{opacity:0;pointer-events:none}
-  .spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
-  .loading-text{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em}
-  #map-overlay{position:absolute;inset:0;background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--muted);z-index:5;transition:opacity .3s;pointer-events:none}
-  #map-overlay.hidden{opacity:0}
-  #debug{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;overflow:auto;padding:16px;font-family:var(--mono);font-size:11px;color:#aaa;white-space:pre-wrap;word-break:break-all}
-  #debug-close{position:fixed;top:12px;right:12px;background:var(--red);color:#fff;border:none;border-radius:999px;padding:4px 10px;font-family:var(--mono);font-size:11px;cursor:pointer;z-index:10000}
-  #err{display:none;margin:0 0 8px;padding:9px 11px;border-radius:var(--rs);background:var(--red-dim);border:0.5px solid rgba(255,79,79,.3);font-family:var(--mono);font-size:11px;color:var(--red)}
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; background:var(--bg); color:var(--text); font-family:var(--sans); overflow:hidden; }
+
+  /* ── HEADER ── */
+  header {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    height:52px;
+    background:rgba(13,15,18,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; padding:0 16px; gap:12px;
+  }
+  .header-title {
+    font-family:var(--mono); font-size:13px; font-weight:700;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--amber);
+  }
+  .header-sub { font-size:12px; color:var(--muted); font-weight:300; }
+  .header-right { margin-left:auto; display:flex; align-items:center; gap:12px; }
+
+  .freshness {
+    font-family:var(--mono); font-size:10px; color:var(--subtext);
+    text-align:right; line-height:1.4;
+  }
+  .freshness span { color:var(--amber); display:block; }
+
+  /* ── MAP ── */
+  #map { position:fixed; top:52px; left:0; right:0; bottom:0; }
+  .leaflet-container { background:#0d0f12 !important; }
+  .leaflet-tile { filter:brightness(0.35) saturate(0.3) hue-rotate(180deg) invert(1); }
+
+  /* ── PANEL ── */
+  #panel {
+    position:fixed; top:62px; right:10px;
+    width:260px; z-index:900;
+    display:flex; flex-direction:column; gap:8px;
+    max-height:calc(100vh - 72px);
+  }
+  .card {
+    background:rgba(22,25,32,0.92);
+    backdrop-filter:blur(10px);
+    border:1px solid var(--border);
+    border-radius:8px; padding:12px 14px;
+  }
+  .card-title {
+    font-family:var(--mono); font-size:9px;
+    letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:10px;
+  }
+
+  /* stats */
+  .stats-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .stat { display:flex; flex-direction:column; gap:2px; }
+  .stat-val { font-family:var(--mono); font-size:22px; font-weight:700; color:var(--amber); line-height:1; }
+  .stat-label { font-size:10px; color:var(--subtext); font-weight:300; }
+
+  .vs-badge {
+    display:inline-flex; align-items:center; gap:3px;
+    font-family:var(--mono); font-size:9px;
+    padding:2px 5px; border-radius:3px; margin-top:2px; width:fit-content;
+  }
+  .vs-badge.up      { background:rgba(60,232,122,0.12); color:var(--green); }
+  .vs-badge.down    { background:rgba(232,69,60,0.12);  color:var(--red); }
+  .vs-badge.neutral { background:var(--amber-dim);       color:var(--amber); }
+
+  /* top list */
+  .top-list {
+    display:flex; flex-direction:column; gap:6px;
+    overflow-y:auto; max-height:290px;
+  }
+  .top-item {
+    display:flex; align-items:center; gap:8px;
+    padding:6px 8px; border-radius:5px; cursor:pointer;
+    transition:background 0.15s; border:1px solid transparent;
+  }
+  .top-item:hover { background:var(--amber-dim); border-color:rgba(245,166,35,0.2); }
+  .top-rank { font-family:var(--mono); font-size:9px; color:var(--muted); width:16px; flex-shrink:0; text-align:right; }
+  .top-bar-wrap { flex:1; display:flex; flex-direction:column; gap:3px; min-width:0; }
+  .top-name { font-size:11px; font-weight:500; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .top-bar { height:2px; background:var(--border); border-radius:2px; overflow:hidden; }
+  .top-bar-fill { height:100%; border-radius:2px; background:var(--amber); transition:width 0.5s ease; }
+  .top-count { font-family:var(--mono); font-size:11px; color:var(--amber); flex-shrink:0; text-align:right; min-width:36px; }
+
+  /* ── POPUP ── */
+  .leaflet-popup-content-wrapper {
+    background:var(--surface) !important; border:1px solid var(--border) !important;
+    border-radius:8px !important; box-shadow:0 8px 24px rgba(0,0,0,0.6) !important; padding:0 !important;
+  }
+  .leaflet-popup-tip { background:var(--surface) !important; }
+  .leaflet-popup-content { margin:0 !important; width:200px !important; }
+  .popup-inner { padding:12px 14px; }
+  .popup-name { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--amber); margin-bottom:6px; line-height:1.3; }
+  .popup-count { font-family:var(--mono); font-size:28px; font-weight:700; color:var(--text); line-height:1; }
+  .popup-unit { font-size:11px; color:var(--subtext); margin-bottom:8px; }
+
+  /* ── LOADING / ERROR ── */
+  #loading {
+    position:fixed; inset:0; z-index:9999; background:var(--bg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+    transition:opacity 0.4s;
+  }
+  #loading.hide { opacity:0; pointer-events:none; }
+  .load-title { font-family:var(--mono); font-size:13px; color:var(--amber); letter-spacing:0.1em; }
+  .load-sub   { font-family:var(--mono); font-size:10px; color:var(--muted); }
+  .load-bar   { width:180px; height:2px; background:var(--border); border-radius:2px; overflow:hidden; }
+  .load-fill  { height:100%; background:var(--amber); border-radius:2px; transition:width 0.3s ease; }
+
+  /* ── LEGEND ── */
+  #legend { position:fixed; bottom:20px; left:10px; z-index:900; }
+  .legend-inner {
+    background:rgba(22,25,32,0.88); backdrop-filter:blur(8px);
+    border:1px solid var(--border); border-radius:6px;
+    padding:8px 12px; display:flex; align-items:center; gap:10px;
+    font-size:10px; color:var(--subtext); font-family:var(--mono);
+  }
+  .legend-swatch {
+    width:50px; height:6px; border-radius:3px;
+    background:linear-gradient(to right, rgba(245,166,35,0.2), rgba(245,166,35,0.6), rgba(232,69,60,1));
+  }
+
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
 </style>
 </head>
 <body>
-<div id="loading"><div class="spinner"></div><div class="loading-text">FETCHING LIVE DATA…</div></div>
-<div id="debug"><button id="debug-close" onclick="document.getElementById('debug').style.display='none'">✕ close</button><div id="debug-content"></div></div>
 
-<div id="app">
-  <header>
-    <div class="header-top">
-      <div class="wordmark">Melb Parking</div>
-      <div class="live-badge"><div class="live-dot" id="live-dot"></div><span id="live-label">LIVE</span></div>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-label">Available</div><div class="stat-value green" id="s-avail">—</div><div class="stat-sub" id="s-pct">—</div></div>
-      <div class="stat"><div class="stat-label">Occupied</div><div class="stat-value red" id="s-occ">—</div><div class="stat-sub" id="s-total">—</div></div>
-      <div class="stat"><div class="stat-label">Updated</div><div class="stat-value" id="s-time" style="font-size:13px;padding-top:5px">—</div><div class="stat-sub" id="s-date">—</div></div>
-    </div>
-    <div class="suburb-scroll" id="suburb-scroll"></div>
-    <div class="filter-row">
-      <button class="f-pill all active" onclick="setFilter('all',this)">All</button>
-      <button class="f-pill free" onclick="setFilter('free',this)">Available</button>
-      <button class="f-pill occ"  onclick="setFilter('occ',this)">Occupied</button>
-    </div>
-    <div id="err"></div>
-  </header>
-
-  <div id="map-wrap">
-    <div id="map-overlay">Loading map…</div>
-    <div id="map"></div>
-    <div class="map-legend">
-      <div class="leg-row"><div class="leg-dot" style="background:#00e676"></div>Available</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#ff4f4f"></div>Occupied</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#555"></div>Unknown</div>
-    </div>
-  </div>
-
-  <div id="sheet">
-    <div class="sheet-handle" onclick="toggleSheet()">
-      <div style="flex:1"><div class="sheet-grip"></div><div class="sheet-title" id="sheet-title">Streets by availability</div></div>
-      <div class="sheet-toggle" id="sheet-toggle">▼</div>
-    </div>
-    <div id="street-list"></div>
-  </div>
-
-  <footer>
-    <div class="footer-status" id="footer-status">City of Melbourne Open Data · No API key required</div>
-    <button class="refresh-btn" id="refresh-btn" onclick="loadData()"><span id="refresh-icon">↻</span> Refresh</button>
-  </footer>
+<div id="loading">
+  <div class="load-title">MELBOURNE FOOT TRAFFIC</div>
+  <div class="load-bar"><div class="load-fill" id="load-fill"></div></div>
+  <div class="load-sub" id="load-msg">Loading data…</div>
 </div>
 
-<script>
-// ── Config ──────────────────────────────────────────────
-const API = 'https://data.melbourne.vic.gov.au/resource/vh2v-4nfs.json?$limit=10000';
+<header>
+  <div class="header-title">Foot Traffic</div>
+  <div class="header-sub">Melbourne CBD</div>
+  <div class="header-right">
+    <div class="freshness" id="freshness">—</div>
+  </div>
+</header>
 
-const SUBURBS = {
-  'All':             { center:[-37.814,144.963], zoom:14, bounds:null },
-  'CBD':             { center:[-37.814,144.963], zoom:15, bounds:{minLat:-37.823,maxLat:-37.806,minLon:144.952,maxLon:144.976} },
-  'Docklands':       { center:[-37.818,144.942], zoom:15, bounds:{minLat:-37.825,maxLat:-37.812,minLon:144.932,maxLon:144.954} },
-  'Southbank':       { center:[-37.825,144.962], zoom:15, bounds:{minLat:-37.832,maxLat:-37.820,minLon:144.954,maxLon:144.972} },
-  'Carlton':         { center:[-37.800,144.967], zoom:15, bounds:{minLat:-37.807,maxLat:-37.793,minLon:144.959,maxLon:144.975} },
-  'East Melb':       { center:[-37.813,144.983], zoom:15, bounds:{minLat:-37.820,maxLat:-37.806,minLon:144.974,maxLon:144.992} },
-  'Fitzroy':         { center:[-37.800,144.982], zoom:15, bounds:{minLat:-37.806,maxLat:-37.793,minLon:144.974,maxLon:144.990} },
-  'North Melb':      { center:[-37.800,144.949], zoom:15, bounds:{minLat:-37.810,maxLat:-37.793,minLon:144.940,maxLon:144.960} },
+<div id="map"></div>
+
+<div id="panel">
+  <div class="card">
+    <div class="card-title">Right Now</div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-val" id="stat-total">—</div>
+        <div class="stat-label">pedestrians/hr</div>
+        <div id="stat-vs" class="vs-badge neutral" style="display:none"></div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" id="stat-sensors">—</div>
+        <div class="stat-label">active sensors</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column;">
+    <div class="card-title">Busiest Locations</div>
+    <div class="top-list" id="top-list"></div>
+  </div>
+</div>
+
+<div id="legend">
+  <div class="legend-inner">
+    <span>Quiet</span>
+    <div class="legend-swatch"></div>
+    <span>Busy</span>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+<script>
+// ── MAP INIT ──────────────────────────────────────────────────────────
+const map = L.map('map', {
+  center: [-37.814, 144.963],
+  zoom: 15,
+  zoomControl: false,
+  attributionControl: false,
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+L.control.attribution({ prefix: false }).addAttribution('© OpenStreetMap · City of Melbourne').addTo(map);
+L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+// ── HELPERS ───────────────────────────────────────────────────────────
+function fmtNum(n) {
+  return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
+}
+
+function setLoad(pct, msg) {
+  document.getElementById('load-fill').style.width = pct + '%';
+  if (msg) document.getElementById('load-msg').textContent = msg;
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────
+let heatLayer   = null;
+let markerStore = {};
+
+function render(data) {
+  // Freshness label
+  document.getElementById('freshness').innerHTML =
+    `Data as at<span>${data.fetched_at_local}</span>`;
+
+  // Stats panel
+  document.getElementById('stat-total').textContent   = fmtNum(data.total_now);
+  document.getElementById('stat-sensors').textContent = data.sensor_count;
+
+  if (data.total_avg) {
+    const pct  = Math.round(((data.total_now - data.total_avg) / data.total_avg) * 100);
+    const sign = pct >= 0 ? '+' : '';
+    const cls  = pct > 10 ? 'up' : pct < -10 ? 'down' : 'neutral';
+    const el   = document.getElementById('stat-vs');
+    el.style.display  = 'inline-flex';
+    el.className      = `vs-badge ${cls}`;
+    el.textContent    = `${sign}${pct}% vs avg`;
+  }
+
+  // Heatmap
+  if (heatLayer) map.removeLayer(heatLayer);
+  Object.values(markerStore).forEach(m => map.removeLayer(m));
+  markerStore = {};
+
+  const maxCount = data.locations[0]?.count || 1;
+  const points   = data.locations.map(loc => [loc.lat, loc.lng, loc.count]);
+
+  heatLayer = L.heatLayer(points, {
+    radius: 35,
+    blur:   30,
+    maxZoom: 17,
+    max:    maxCount,
+    gradient: {
+      0.1: 'rgba(245,166,35,0.3)',
+      0.4: 'rgba(245,166,35,0.7)',
+      0.7: 'rgba(232,120,35,0.9)',
+      1.0: 'rgba(232,69,60,1)',
+    },
+  }).addTo(map);
+
+  // Invisible click targets over each sensor
+  data.locations.forEach(loc => {
+    const icon = L.divIcon({
+      className: '',
+      html: '<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;"></div>',
+      iconSize: [28, 28], iconAnchor: [14, 14],
+    });
+
+    const vs = loc.vs_pct != null
+      ? `<div class="vs-badge ${loc.vs_pct > 10 ? 'up' : loc.vs_pct < -10 ? 'down' : 'neutral'}" style="margin-bottom:8px">
+           ${loc.vs_pct >= 0 ? '+' : ''}${loc.vs_pct}% vs avg
+         </div>`
+      : '';
+
+    const popup = `<div class="popup-inner">
+      <div class="popup-name">${loc.name}</div>
+      <div class="popup-count">${fmtNum(loc.count)}</div>
+      <div class="popup-unit">pedestrians this hour</div>
+      ${vs}
+    </div>`;
+
+    const marker = L.marker([loc.lat, loc.lng], { icon })
+      .bindPopup(popup, { maxWidth: 220, minWidth: 200 });
+    marker.addTo(map);
+    markerStore[loc.id] = marker;
+  });
+
+  // Top 10 list
+  const top10   = data.locations.slice(0, 10);
+  const maxTop  = top10[0]?.count || 1;
+  document.getElementById('top-list').innerHTML = top10.map((loc, i) => `
+    <div class="top-item" onclick="flyTo('${loc.id}')">
+      <div class="top-rank">${i + 1}</div>
+      <div class="top-bar-wrap">
+        <div class="top-name" title="${loc.name}">${loc.name.replace(/\s*\(.*\)/, '').trim()}</div>
+        <div class="top-bar">
+          <div class="top-bar-fill" style="width:${Math.round((loc.count / maxTop) * 100)}%"></div>
+        </div>
+      </div>
+      <div class="top-count">${fmtNum(loc.count)}</div>
+    </div>`).join('');
+}
+
+window.flyTo = function(id) {
+  const m = markerStore[id];
+  if (!m) return;
+  const ll = m.getLatLng();
+  map.flyTo(ll, 17, { duration: 1 });
+  setTimeout(() => m.openPopup(), 1100);
 };
 
-// ── State ────────────────────────────────────────────────
-let allBays = [];
-let filter = 'all';
-let activeSuburb = 'All';
-let map, layerGroup, sheetOpen = true;
-
-// ── Data normaliser — handles any shape the API might return ──
-function normaliseBay(b) {
-  let lat, lon;
-
-  // Shape A: geo_point_2d is {lat, lon}
-  if (b.geo_point_2d && b.geo_point_2d.lat !== undefined) {
-    lat = parseFloat(b.geo_point_2d.lat);
-    lon = parseFloat(b.geo_point_2d.lon);
-  }
-  // Shape B: geo_point_2d is {latitude, longitude}
-  else if (b.geo_point_2d && b.geo_point_2d.latitude !== undefined) {
-    lat = parseFloat(b.geo_point_2d.latitude);
-    lon = parseFloat(b.geo_point_2d.longitude);
-  }
-  // Shape C: location is {type, coordinates:[lon, lat]}  (GeoJSON order!)
-  else if (b.location && Array.isArray(b.location.coordinates)) {
-    lon = parseFloat(b.location.coordinates[0]);
-    lat = parseFloat(b.location.coordinates[1]);
-  }
-  // Shape D: flat lat/lon fields
-  else if (b.latitude !== undefined) {
-    lat = parseFloat(b.latitude);
-    lon = parseFloat(b.longitude);
-  }
-  // Shape E: location is "lat,lon" string
-  else if (typeof b.location === 'string' && b.location.includes(',')) {
-    const parts = b.location.split(',');
-    lat = parseFloat(parts[0]);
-    lon = parseFloat(parts[1]);
-  }
-
-  if (isNaN(lat) || isNaN(lon)) return null;
-
-  return {
-    lat, lon,
-    status:      b.status || b.Status || '',
-    marker_id:   b.st_marker_id || b.bay_id || b.marker_id || b.bayid || '—',
-    updated:     b.lastupdated || b.last_updated || b.LastUpdated || null,
-  };
-}
-
-// ── Filtering ────────────────────────────────────────────
-function filteredBays() {
-  let bays = allBays;
-  const s = SUBURBS[activeSuburb];
-  if (s && s.bounds) {
-    const {minLat,maxLat,minLon,maxLon} = s.bounds;
-    bays = bays.filter(b => b.lat>=minLat && b.lat<=maxLat && b.lon>=minLon && b.lon<=maxLon);
-  }
-  if (filter==='free') bays = bays.filter(b => b.status==='Unoccupied');
-  if (filter==='occ')  bays = bays.filter(b => b.status==='Present');
-  return bays;
-}
-
-function setFilter(f, el) {
-  filter = f;
-  document.querySelectorAll('.f-pill').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  render();
-}
-
-function setSuburb(name) {
-  activeSuburb = name;
-  document.querySelectorAll('.s-pill').forEach(p=>p.classList.toggle('active', p.dataset.name===name));
-  const s = SUBURBS[name];
-  if (map && s) map.flyTo(s.center, s.zoom, {duration:.7});
-  render();
-}
-
-// ── Stats ─────────────────────────────────────────────────
-function availPct(bays) {
-  if (!bays.length) return 0;
-  return Math.round(bays.filter(b=>b.status==='Unoccupied').length / bays.length * 100);
-}
-
-function dotColor(pct) {
-  return pct>=50 ? '#00e676' : pct>=20 ? '#ffb300' : '#ff4f4f';
-}
-
-function updateStats(bays) {
-  const total = bays.length;
-  const avail = bays.filter(b=>b.status==='Unoccupied').length;
-  const occ   = bays.filter(b=>b.status==='Present').length;
-  const pct   = total ? Math.round(avail/total*100) : 0;
-  document.getElementById('s-avail').textContent = avail.toLocaleString();
-  document.getElementById('s-occ').textContent   = occ.toLocaleString();
-  document.getElementById('s-pct').textContent   = pct+'% free';
-  document.getElementById('s-total').textContent = total.toLocaleString()+' bays';
-}
-
-function updateTime() {
-  const now = new Date();
-  document.getElementById('s-time').textContent = now.toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('s-date').textContent = now.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'});
-}
-
-// ── Suburb pills ──────────────────────────────────────────
-function buildSuburbPills() {
-  const wrap = document.getElementById('suburb-scroll');
-  wrap.innerHTML = Object.keys(SUBURBS).map(name => {
-    const s = SUBURBS[name];
-    const bays = s.bounds
-      ? allBays.filter(b=>b.lat>=s.bounds.minLat&&b.lat<=s.bounds.maxLat&&b.lon>=s.bounds.minLon&&b.lon<=s.bounds.maxLon)
-      : allBays;
-    const pct = availPct(bays);
-    const col = dotColor(pct);
-    return `<button class="s-pill${name===activeSuburb?' active':''}" data-name="${name}" onclick="setSuburb('${name}')">
-      <span class="s-dot" style="background:${col}"></span>${name==='All'?'All suburbs':name}
-    </button>`;
-  }).join('');
-}
-
-// ── Map markers ───────────────────────────────────────────
-function drawMarkers(bays) {
-  if (!layerGroup) return;
-  layerGroup.clearLayers();
-  const zoom = map.getZoom();
-  const r = zoom>=16 ? 6 : zoom>=15 ? 4 : 3;
-
-  for (const b of bays) {
-    const color = b.status==='Unoccupied' ? '#00e676' : b.status==='Present' ? '#ff4f4f' : '#555';
-    const m = L.circleMarker([b.lat, b.lon], {
-      radius: r, fillColor: color, fillOpacity: .85,
-      color:'rgba(0,0,0,0.4)', weight:1,
-    });
-    const updated = b.updated ? new Date(b.updated).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'}) : '—';
-    const label = b.status==='Unoccupied' ? '✓ Available' : b.status==='Present' ? '✕ Occupied' : '? Unknown';
-    m.bindPopup(`<div style="line-height:1.7">
-      <div style="font-weight:500;color:${color};margin-bottom:3px">${label}</div>
-      <div style="color:#888">ID: ${b.marker_id}</div>
-      <div style="color:#888">Updated: ${updated}</div>
-    </div>`, {maxWidth:170});
-    layerGroup.addLayer(m);
-  }
-  document.getElementById('map-overlay').classList.add('hidden');
-}
-
-// ── Street list ───────────────────────────────────────────
-function renderStreets(bays) {
-  const streets = {};
-  for (const b of bays) {
-    const key = b.marker_id || '—';
-    if (key==='—') continue;
-    if (!streets[key]) streets[key]={total:0,avail:0};
-    streets[key].total++;
-    if (b.status==='Unoccupied') streets[key].avail++;
-  }
-  const sorted = Object.entries(streets).sort((a,b)=>b[1].avail-a[1].avail).slice(0,40);
-  document.getElementById('sheet-title').textContent =
-    `${sorted.length} zones · ${bays.length.toLocaleString()} bays`;
-
-  const el = document.getElementById('street-list');
-  if (!sorted.length) {
-    el.innerHTML='<div style="padding:14px;font-family:var(--mono);font-size:11px;color:var(--muted)">No bays in this selection</div>';
-    return;
-  }
-  el.innerHTML = sorted.map(([name,s])=>{
-    const pct = Math.round(s.avail/s.total*100);
-    const col = pct>=50 ? 'var(--green)' : pct>=20 ? 'var(--amber)' : 'var(--red)';
-    return `<div class="s-row">
-      <div><div class="s-name">${name}</div><div class="s-count">${s.avail}/${s.total} free</div></div>
-      <div class="s-right">
-        <div class="bar"><div class="bar-fill" style="width:${pct}%;background:${col}"></div></div>
-        <div class="pct-label" style="color:${col}">${pct}%</div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function render() {
-  const bays = filteredBays();
-  updateStats(bays);
-  drawMarkers(bays);
-  renderStreets(bays);
-  buildSuburbPills();
-}
-
-function toggleSheet() {
-  sheetOpen = !sheetOpen;
-  document.getElementById('street-list').style.display = sheetOpen?'':'none';
-  document.getElementById('sheet-toggle').textContent = sheetOpen?'▼':'▲';
-}
-
-// ── Load data ─────────────────────────────────────────────
+// ── LOAD JSON ─────────────────────────────────────────────────────────
 async function loadData() {
-  const icon = document.getElementById('refresh-icon');
-  icon.classList.add('spinning');
-  document.getElementById('refresh-btn').disabled = true;
-  document.getElementById('live-label').textContent = 'LOADING';
-  document.getElementById('err').style.display = 'none';
-
+  setLoad(20, 'Loading foot-traffic.json…');
   try {
-    const res = await fetch(API, {
-      headers: { 'Accept': 'application/json' }
-    });
-
-    const text = await res.text();
-
-    // Show debug info in console always
-    console.log('Status:', res.status);
-    console.log('Headers:', [...res.headers.entries()]);
-    console.log('Body preview:', text.slice(0, 500));
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status} — ${text.slice(0,200)}`);
-    }
-
-    let raw;
-    try { raw = JSON.parse(text); }
-    catch(e) { throw new Error('Response was not JSON: ' + text.slice(0,200)); }
-
-    // Handle both array and object responses
-    const records = Array.isArray(raw) ? raw : (raw.results || raw.data || []);
-
-    if (!records.length) throw new Error('API returned 0 records. Raw: ' + text.slice(0,300));
-
-    // Log first record so we can see the real field names
-    console.log('First record:', JSON.stringify(records[0], null, 2));
-
-    allBays = records.map(normaliseBay).filter(Boolean);
-
-    if (!allBays.length) {
-      // Show raw first record to user for debugging
-      showDebug('Could not parse coordinates. First record:\n' + JSON.stringify(records[0], null, 2));
-      throw new Error('Could not parse location data — see debug panel');
-    }
-
-    updateTime();
-    render();
-    document.getElementById('footer-status').textContent =
-      `${allBays.length.toLocaleString()} sensors · City of Melbourne Open Data`;
-    document.getElementById('live-label').textContent = 'LIVE';
-
-  } catch(e) {
-    const err = document.getElementById('err');
-    err.style.display = 'block';
-    err.textContent = e.message;
-    document.getElementById('live-label').textContent = 'ERROR';
-    console.error('loadData error:', e);
-  } finally {
-    icon.classList.remove('spinning');
-    document.getElementById('refresh-btn').disabled = false;
-    document.getElementById('loading').classList.add('hidden');
+    // Cache-bust so GitHub Pages serves the latest file, not a CDN-cached copy
+    const url = `data/foot-traffic.json?v=${Date.now()}`;
+    const r   = await fetch(url);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    setLoad(90, 'Rendering…');
+    render(data);
+    setLoad(100);
+    setTimeout(() => document.getElementById('loading').classList.add('hide'), 350);
+  } catch (err) {
+    console.error(err);
+    document.getElementById('load-msg').textContent = '⚠ Could not load foot-traffic.json — has the Python script run yet?';
+    document.getElementById('load-fill').style.background = '#e8453c';
   }
 }
 
-function showDebug(msg) {
-  document.getElementById('debug-content').textContent = msg;
-  document.getElementById('debug').style.display = 'block';
-}
-
-// ── Map init ──────────────────────────────────────────────
-function initMap() {
-  map = L.map('map', {
-    center:[-37.814,144.963], zoom:14,
-    zoomControl:false, attributionControl:true,
-  });
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom:19, attribution:'© OpenStreetMap contributors',
-  }).addTo(map);
-  layerGroup = L.layerGroup().addTo(map);
-  map.on('zoomend', ()=>drawMarkers(filteredBays()));
-}
-
-// ── Boot ──────────────────────────────────────────────────
-window.addEventListener('load', () => {
-  if (typeof L === 'undefined') {
-    document.getElementById('err').style.display = 'block';
-    document.getElementById('err').textContent = 'Map library (Leaflet) failed to load. Check internet connection.';
-    document.getElementById('loading').classList.add('hidden');
-    loadData();
-    return;
-  }
-  initMap();
-  loadData();
-  // Auto-refresh every 2 min
-  setInterval(loadData, 120000);
-});
+loadData();
 </script>
 </body>
 </html>
