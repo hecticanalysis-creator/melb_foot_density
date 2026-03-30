@@ -5,328 +5,315 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Melbourne Foot Traffic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
-/* ── TOKENS ───────────────────────────────────────────────────────── */
 :root {
-  --bg:        #0d0f12;
-  --surface:   #13161b;
-  --surface2:  #1a1e26;
-  --border:    #252a35;
-  --border2:   #1e222c;
-  --amber:     #f5a623;
-  --amber-lo:  rgba(245,166,35,0.12);
-  --amber-mid: rgba(245,166,35,0.35);
-  --red:       #e8453c;
-  --red-lo:    rgba(232,69,60,0.12);
-  --green:     #2ecc71;
-  --green-lo:  rgba(46,204,113,0.12);
-  --muted:     #4a5260;
-  --subtext:   #7a8496;
-  --text:      #dde1ea;
-  --mono:      'Space Mono', monospace;
-  --sans:      'DM Sans', sans-serif;
+  --bg:       #0d0f12;
+  --s1:       #13161b;
+  --s2:       #1a1e26;
+  --b1:       #252a35;
+  --b2:       #1c2030;
+  --amber:    #f5a623;
+  --amber-lo: rgba(245,166,35,0.12);
+  --amber-md: rgba(245,166,35,0.3);
+  --red:      #e8453c;
+  --red-lo:   rgba(232,69,60,0.12);
+  --green:    #2ecc71;
+  --grn-lo:   rgba(46,204,113,0.12);
+  --muted:    #4a5260;
+  --sub:      #7a8496;
+  --text:     #dde1ea;
+  --mono:     'Space Mono', monospace;
+  --sans:     'DM Sans', sans-serif;
 }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);overflow:hidden}
 
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-html, body { height:100%; background:var(--bg); color:var(--text); font-family:var(--sans); overflow:hidden; }
+/* ── LOADING ── */
+#loading{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .5s}
+#loading.hide{opacity:0;pointer-events:none}
+.ld-org{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.ld-title{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--amber);letter-spacing:.06em}
+.ld-bar{width:200px;height:2px;background:var(--b1);border-radius:2px;overflow:hidden}
+.ld-fill{height:100%;width:0;background:var(--amber);border-radius:2px;transition:width .35s ease}
+.ld-msg{font-family:var(--mono);font-size:10px;color:var(--muted)}
 
-/* ── LOADING ────────────────────────────────────────────────────────── */
-#loading {
-  position:fixed; inset:0; z-index:9999;
-  background:var(--bg);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
-  transition:opacity 0.5s ease;
-}
-#loading.hide { opacity:0; pointer-events:none; }
-.load-logo   { font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); }
-.load-title  { font-family:var(--mono); font-size:18px; font-weight:700; color:var(--amber); letter-spacing:0.06em; text-align:center; }
-.load-bar    { width:200px; height:2px; background:var(--border); border-radius:2px; overflow:hidden; }
-.load-fill   { height:100%; width:0%; background:var(--amber); border-radius:2px; transition:width 0.35s ease; }
-.load-sub    { font-family:var(--mono); font-size:10px; color:var(--muted); }
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;right:0;z-index:800;height:50px;background:rgba(13,15,18,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 14px;gap:10px}
+.hdr-title{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber)}
+.hdr-sub{font-size:11px;color:var(--muted);font-weight:300}
+.hdr-r{margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--sub);text-align:right;line-height:1.6}
+.hdr-r strong{color:var(--amber);font-weight:400}
 
-/* ── HEADER ─────────────────────────────────────────────────────────── */
-header {
-  position:fixed; top:0; left:0; right:0; z-index:800;
-  height:50px;
-  background:rgba(13,15,18,0.96);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  display:flex; align-items:center; padding:0 14px; gap:10px;
-}
-.hdr-title { font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--amber); }
-.hdr-sub   { font-size:11px; color:var(--muted); font-weight:300; }
-.hdr-right { margin-left:auto; font-family:var(--mono); font-size:9px; color:var(--subtext); text-align:right; line-height:1.6; }
-.hdr-right strong { color:var(--amber); font-weight:400; }
+/* ── NAV ── */
+nav{position:fixed;bottom:0;left:0;right:0;z-index:800;height:54px;background:rgba(13,15,18,.97);backdrop-filter:blur(14px);border-top:1px solid var(--b1);display:flex}
+.tb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:10px;font-weight:500;color:var(--muted);transition:color .2s;padding-bottom:2px}
+.tb svg{opacity:.4;transition:opacity .2s}
+.tb.active{color:var(--amber)}
+.tb.active svg{opacity:1}
 
-/* ── TAB BAR ────────────────────────────────────────────────────────── */
-nav {
-  position:fixed; bottom:0; left:0; right:0; z-index:800;
-  height:54px;
-  background:rgba(13,15,18,0.97);
-  backdrop-filter:blur(14px);
-  border-top:1px solid var(--border);
-  display:flex;
-}
-.tab-btn {
-  flex:1; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:3px;
-  background:none; border:none; cursor:pointer;
-  font-family:var(--sans); font-size:10px; font-weight:500;
-  color:var(--muted); transition:color 0.2s; padding-bottom:2px;
-}
-.tab-btn svg { opacity:0.45; transition:opacity 0.2s; }
-.tab-btn.active { color:var(--amber); }
-.tab-btn.active svg { opacity:1; }
+/* ── VIEWS ── */
+.view{position:fixed;top:50px;left:0;right:0;bottom:54px;overflow-y:auto;overflow-x:hidden;display:none}
+.view.active{display:block}
+#vmap{overflow:hidden}
 
-/* ── VIEWS ──────────────────────────────────────────────────────────── */
-.view {
-  position:fixed; top:50px; left:0; right:0; bottom:54px;
-  overflow-y:auto; overflow-x:hidden; display:none;
-}
-.view.active { display:block; }
-#view-map    { overflow:hidden; }
+/* ── SHARED CARD ── */
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:15px}
+.ct{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:11px}
+.badge{display:inline-flex;align-items:center;font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;font-weight:400}
+.badge.up  {background:var(--grn-lo);color:var(--green)}
+.badge.down{background:var(--red-lo);color:var(--red)}
+.badge.flat{background:var(--amber-lo);color:var(--amber)}
 
-/* ── HOME ───────────────────────────────────────────────────────────── */
-.home-wrap {
-  max-width:560px; margin:0 auto;
-  padding:20px 14px 28px;
-  display:flex; flex-direction:column; gap:14px;
-}
+/* ══════════════════════════════════════
+   HOME
+══════════════════════════════════════ */
+.hw{max-width:560px;margin:0 auto;padding:16px 12px 28px;display:flex;flex-direction:column;gap:12px}
 
-.home-hero {
-  background:linear-gradient(135deg, #111520 0%, #1a2035 100%);
-  border:1px solid var(--border); border-radius:12px; padding:22px 18px;
-  position:relative; overflow:hidden;
-}
-.home-hero::after {
-  content:''; position:absolute; top:-50px; right:-50px;
-  width:180px; height:180px;
-  background:radial-gradient(circle, rgba(245,166,35,0.07) 0%, transparent 65%);
-  pointer-events:none;
-}
-.hero-eyebrow { font-family:var(--mono); font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-.hero-title   { font-size:21px; font-weight:600; color:var(--text); line-height:1.25; margin-bottom:10px; }
-.hero-title em { color:var(--amber); font-style:normal; }
-.hero-desc    { font-size:13px; color:var(--subtext); font-weight:300; line-height:1.65; }
+/* hero */
+.hero{background:linear-gradient(135deg,#0e1320 0%,#172035 100%);border:1px solid var(--b1);border-radius:12px;padding:20px 18px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(245,166,35,.06) 0%,transparent 65%);pointer-events:none}
+.hero-eye{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.hero-h{font-size:20px;font-weight:600;color:var(--text);line-height:1.25;margin-bottom:9px}
+.hero-h em{color:var(--amber);font-style:normal}
+.hero-p{font-size:13px;color:var(--sub);font-weight:300;line-height:1.65}
 
-.home-stats   { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
-.home-stat    { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:13px 11px; }
-.hs-val       { font-family:var(--mono); font-size:19px; font-weight:700; color:var(--amber); line-height:1; margin-bottom:4px; }
-.hs-label     { font-size:10px; color:var(--subtext); font-weight:300; line-height:1.3; }
+/* stat row */
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.stat-box{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:12px 10px}
+.sv{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--amber);line-height:1;margin-bottom:4px}
+.sl{font-size:10px;color:var(--sub);font-weight:300;line-height:1.3}
 
-.home-card    { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:15px; }
-.hc-title     { font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:11px; }
-.hc-body      { font-size:13px; color:var(--subtext); line-height:1.65; font-weight:300; }
-.hc-body p   { margin-bottom:9px; }
-.hc-body p:last-child { margin-bottom:0; }
-.hc-body a   { color:var(--amber); text-decoration:none; }
-.hc-body a:hover { text-decoration:underline; }
-.hc-body strong { color:var(--text); font-weight:500; }
+/* decision card */
+.decision-card{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:15px}
+.dc-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--b2)}
+.dc-row:last-child{border-bottom:none;padding-bottom:0}
+.dc-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.dc-icon.green{background:var(--grn-lo)}
+.dc-icon.amber{background:var(--amber-lo)}
+.dc-icon.red  {background:var(--red-lo)}
+.dc-body{flex:1;min-width:0}
+.dc-label{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px}
+.dc-sub{font-size:11px;color:var(--sub);font-weight:300}
 
-.src-row      { display:flex; gap:10px; padding:10px 0; border-top:1px solid var(--border2); }
-.src-row:first-child { border-top:none; padding-top:0; }
-.src-dot      { width:6px; height:6px; border-radius:50%; background:var(--amber); flex-shrink:0; margin-top:5px; }
-.src-text     { font-size:12px; color:var(--subtext); line-height:1.5; }
-.src-text strong { color:var(--text); font-weight:500; }
+/* hourly chart */
+.chart-wrap{padding:4px 0}
+.chart-bars{display:flex;align-items:flex-end;gap:2px;height:70px}
+.chart-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.chart-bar{width:100%;border-radius:2px 2px 0 0;min-height:2px;transition:height .4s ease}
+.chart-bar.current{box-shadow:0 0 6px rgba(245,166,35,.5)}
+.chart-xlabels{display:flex;justify-content:space-between;padding:0 0;margin-top:4px}
+.chart-xlabel{font-family:var(--mono);font-size:8px;color:var(--muted)}
 
-.legend-grid  { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-top:10px; }
-.lg-item      { display:flex; flex-direction:column; align-items:center; gap:5px; }
-.lg-item span { font-size:9px; color:var(--subtext); text-align:center; line-height:1.3; }
+/* peak insight row */
+.peak-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--b2)}
+.peak-row:last-child{border-bottom:none;padding-bottom:0}
+.peak-label{font-size:12px;color:var(--sub)}
+.peak-val{font-family:var(--mono);font-size:12px;color:var(--amber)}
 
-/* ── MAP ────────────────────────────────────────────────────────────── */
-#map { position:absolute; inset:0; }
-.leaflet-container { background:#090b0e !important; }
-.leaflet-tile      { filter:brightness(0.28) saturate(0.2) hue-rotate(185deg) invert(1); }
-.leaflet-control-zoom a { background:var(--surface) !important; color:var(--text) !important; border-color:var(--border) !important; }
+/* sources */
+.src-row{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--b2)}
+.src-row:first-child{border-top:none;padding-top:0}
+.src-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:5px}
+.src-txt{font-size:12px;color:var(--sub);line-height:1.5}
+.src-txt strong{color:var(--text);font-weight:500}
+.src-txt a{color:var(--amber);text-decoration:none}
 
-.hex-marker         { cursor:pointer; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.6)); }
-.hex-marker:hover   { filter:drop-shadow(0 2px 10px rgba(245,166,35,0.45)); }
+/* legend grid */
+.lg-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.lg-item{display:flex;flex-direction:column;align-items:center;gap:5px}
+.lg-item span{font-size:9px;color:var(--sub);text-align:center;line-height:1.3}
 
-.leaflet-popup-content-wrapper {
-  background:var(--surface) !important; border:1px solid var(--border) !important;
-  border-radius:10px !important; box-shadow:0 8px 28px rgba(0,0,0,0.7) !important; padding:0 !important;
-}
-.leaflet-popup-tip-container { display:none !important; }
-.leaflet-popup-content       { margin:0 !important; width:240px !important; }
+/* ══════════════════════════════════════
+   MAP
+══════════════════════════════════════ */
+#map{position:absolute;inset:0}
+.leaflet-container{background:#090b0e!important}
+.leaflet-tile{filter:brightness(.28) saturate(.2) hue-rotate(185deg) invert(1)}
+.leaflet-control-zoom a{background:var(--s1)!important;color:var(--text)!important;border-color:var(--b1)!important}
+.hex-mk{cursor:pointer;filter:drop-shadow(0 2px 5px rgba(0,0,0,.6))}
+.hex-mk:hover{filter:drop-shadow(0 2px 10px rgba(245,166,35,.45))}
 
-.popup-inner  { padding:14px 16px; }
-.popup-rank   { font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
-.popup-name   { font-size:13px; font-weight:600; color:var(--text); line-height:1.3; margin-bottom:10px; }
-.popup-count  { font-family:var(--mono); font-size:32px; font-weight:700; color:var(--amber); line-height:1; }
-.popup-unit   { font-size:11px; color:var(--subtext); margin:2px 0 10px; }
-.popup-vs     { display:inline-flex; font-family:var(--mono); font-size:10px; padding:3px 7px; border-radius:4px; }
-.popup-vs.up   { background:var(--green-lo); color:var(--green); }
-.popup-vs.down { background:var(--red-lo);   color:var(--red); }
-.popup-vs.flat { background:var(--amber-lo); color:var(--amber); }
+.leaflet-popup-content-wrapper{background:var(--s1)!important;border:1px solid var(--b1)!important;border-radius:10px!important;box-shadow:0 8px 28px rgba(0,0,0,.7)!important;padding:0!important}
+.leaflet-popup-tip-container{display:none!important}
+.leaflet-popup-content{margin:0!important;width:240px!important}
+.pop{padding:14px 16px}
+.pop-rank{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.pop-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:9px}
+.pop-count{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--amber);line-height:1}
+.pop-unit{font-size:11px;color:var(--sub);margin:2px 0 8px}
+.pop-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 
-#map-legend {
-  position:absolute; bottom:12px; left:12px; z-index:700;
-  background:rgba(13,15,18,0.9); backdrop-filter:blur(8px);
-  border:1px solid var(--border); border-radius:8px; padding:9px 12px;
-}
-.ml-title { font-family:var(--mono); font-size:8px; letter-spacing:0.1em; color:var(--muted); margin-bottom:7px; text-transform:uppercase; }
-.ml-row   { display:flex; align-items:center; gap:7px; margin-bottom:5px; }
-.ml-row:last-child { margin-bottom:0; }
-.ml-label { font-size:10px; color:var(--subtext); }
+#mleg{position:absolute;bottom:12px;left:12px;z-index:700;background:rgba(13,15,18,.9);backdrop-filter:blur(8px);border:1px solid var(--b1);border-radius:8px;padding:9px 12px}
+.ml-t{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--muted);margin-bottom:7px;text-transform:uppercase}
+.ml-r{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.ml-r:last-child{margin-bottom:0}
+.ml-l{font-size:10px;color:var(--sub)}
 
-/* ── RANKINGS ───────────────────────────────────────────────────────── */
-.rank-wrap   { padding:14px 12px 24px; }
-.rank-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:12px; }
-.rank-title  { font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
-.rank-total  { font-family:var(--mono); font-size:11px; color:var(--amber); }
+/* ══════════════════════════════════════
+   RANKINGS
+══════════════════════════════════════ */
+.rw{padding:14px 12px 28px}
+.rh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.rh-t{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.rh-v{font-family:var(--mono);font-size:11px;color:var(--amber)}
 
-.rank-item {
-  display:flex; align-items:center; gap:9px;
-  padding:9px 10px; margin-bottom:5px;
-  background:var(--surface); border:1px solid var(--border2);
-  border-radius:8px; cursor:pointer;
-  transition:border-color 0.15s, background 0.15s;
-}
-.rank-item:hover  { background:var(--surface2); border-color:var(--amber-mid); }
-.rank-item.top3   { border-color:rgba(245,166,35,0.15); }
+.ri{display:flex;align-items:center;gap:9px;padding:9px 10px;margin-bottom:5px;background:var(--s1);border:1px solid var(--b2);border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s}
+.ri:hover{background:var(--s2);border-color:var(--amber-md)}
+.ri.top3{border-color:rgba(245,166,35,.18)}
+.rn{font-family:var(--mono);font-size:10px;color:var(--muted);width:20px;flex-shrink:0;text-align:right}
+.ri.top3 .rn{color:var(--amber)}
+.rb{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.rb-name{font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rb-track{height:4px;background:var(--b1);border-radius:2px;overflow:hidden}
+.rb-fill{height:100%;border-radius:2px;transition:width .6s ease}
+.rr{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0}
+.rc{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--amber)}
+.rpeak{font-family:var(--mono);font-size:9px;color:var(--muted)}
 
-.rank-num         { font-family:var(--mono); font-size:10px; color:var(--muted); width:20px; flex-shrink:0; text-align:right; }
-.rank-item.top3 .rank-num { color:var(--amber); }
-
-.rank-body        { flex:1; min-width:0; display:flex; flex-direction:column; gap:5px; }
-.rank-name        { font-size:12px; font-weight:500; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.rank-bar-track   { height:4px; background:var(--border); border-radius:2px; overflow:hidden; }
-.rank-bar-fill    { height:100%; border-radius:2px; transition:width 0.6s ease; }
-
-.rank-right       { display:flex; flex-direction:column; align-items:flex-end; gap:3px; flex-shrink:0; }
-.rank-count       { font-family:var(--mono); font-size:12px; font-weight:700; color:var(--amber); }
-.rank-vs          { font-family:var(--mono); font-size:9px; padding:1px 5px; border-radius:3px; }
-.rank-vs.up   { background:var(--green-lo); color:var(--green); }
-.rank-vs.down { background:var(--red-lo);   color:var(--red); }
-.rank-vs.flat { background:var(--amber-lo); color:var(--amber); }
-
-/* ── SCROLLBAR ──────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width:3px; }
-::-webkit-scrollbar-track { background:transparent; }
-::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--b1);border-radius:2px}
 </style>
 </head>
 <body>
 
 <!-- LOADING -->
 <div id="loading">
-  <div class="load-logo">City of Melbourne</div>
-  <div class="load-title">FOOT TRAFFIC</div>
-  <div class="load-bar"><div class="load-fill" id="load-fill"></div></div>
-  <div class="load-sub" id="load-msg">Loading sensor data…</div>
+  <div class="ld-org">City of Melbourne</div>
+  <div class="ld-title">FOOT TRAFFIC</div>
+  <div class="ld-bar"><div class="ld-fill" id="ldfill"></div></div>
+  <div class="ld-msg" id="ldmsg">Loading sensor data…</div>
 </div>
 
 <!-- HEADER -->
 <header>
   <div class="hdr-title">Foot Traffic</div>
   <div class="hdr-sub">Melbourne CBD</div>
-  <div class="hdr-right" id="hdr-freshness">—</div>
+  <div class="hdr-r" id="hdr-fresh">—</div>
 </header>
 
-<!-- ── VIEW: HOME ──────────────────────────────────────────────────── -->
-<div class="view active" id="view-home">
-  <div class="home-wrap">
+<!-- ══ VIEW: HOME ══════════════════════════════════════════════════ -->
+<div class="view active" id="vhome">
+<div class="hw">
 
-    <div class="home-hero">
-      <div class="hero-eyebrow">City of Melbourne · Live Dashboard</div>
-      <div class="hero-title">Where is <em>Melbourne</em><br>walking right now?</div>
-      <div class="hero-desc">
-        Live pedestrian counts from sensors across the Melbourne CBD,
-        refreshed regularly throughout the day. See which streets are busiest
-        and how today compares to the recent average.
-      </div>
-    </div>
-
-    <div class="home-stats">
-      <div class="home-stat">
-        <div class="hs-val" id="hs-total">—</div>
-        <div class="hs-label">pedestrians this hour</div>
-      </div>
-      <div class="home-stat">
-        <div class="hs-val" id="hs-sensors">—</div>
-        <div class="hs-label">active sensors</div>
-      </div>
-      <div class="home-stat">
-        <div class="hs-val" id="hs-top" style="font-size:13px">—</div>
-        <div class="hs-label">busiest location</div>
-      </div>
-    </div>
-
-    <div class="home-card">
-      <div class="hc-title">About this data</div>
-      <div class="hc-body">
-        <p>The <strong>City of Melbourne Pedestrian Counting System</strong> has recorded
-        foot traffic across the CBD since 2009. Sensors are installed under awnings and on
-        street poles, recording bi-directional pedestrian movements 24 hours a day.
-        No images or personal information are collected — only movement counts.</p>
-        <p>Sensor locations are selected based on retail and event activity, regular pedestrian
-        use, and entry/exit flows to key areas of the city.</p>
-      </div>
-    </div>
-
-    <div class="home-card">
-      <div class="hc-title">Data sources</div>
-      <div class="hc-body">
-        <div class="src-row">
-          <div class="src-dot"></div>
-          <div class="src-text"><strong>Live counts</strong> — Pedestrian Counting System, past hour (per minute)<br>
-          <a href="https://data.melbourne.vic.gov.au" target="_blank">data.melbourne.vic.gov.au</a></div>
-        </div>
-        <div class="src-row">
-          <div class="src-dot"></div>
-          <div class="src-text"><strong>Historical average</strong> — Pedestrian Counting System, monthly hourly counts.
-          Used to calculate % above/below typical traffic for this time of day.</div>
-        </div>
-        <div class="src-row">
-          <div class="src-dot"></div>
-          <div class="src-text"><strong>Sensor locations</strong> — Pedestrian Counting System Sensor Locations.
-          137 active sensors across the City of Melbourne municipality.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="home-card">
-      <div class="hc-title">How to read the map</div>
-      <div class="hc-body">
-        <p>Each sensor appears as a hexagon. Colour and size indicate pedestrian intensity:</p>
-        <div class="legend-grid" id="home-legend"></div>
-        <p style="margin-top:12px">Tap any hexagon to see the exact count and comparison to the
-        recent average. Use the <strong>Rankings</strong> tab to see every sensor ordered from
-        busiest to quietest.</p>
-      </div>
-    </div>
-
-    <div class="home-card">
-      <div class="hc-title">How data is refreshed</div>
-      <div class="hc-body">
-        <p>A Python script runs on a local Windows machine via Windows Task Scheduler.
-        It fetches current data from the City of Melbourne Open Data API, builds a static
-        JSON file, and commits it to GitHub. This page loads that file directly — there are
-        no live API calls from the browser.</p>
-        <p id="home-updated" style="color:var(--amber); font-family:var(--mono); font-size:11px;"></p>
-      </div>
-    </div>
-
+  <div class="hero">
+    <div class="hero-eye">City of Melbourne · Live Dashboard</div>
+    <div class="hero-h">Where is <em>Melbourne</em><br>walking right now?</div>
+    <div class="hero-p">Live pedestrian counts from sensors across the CBD, refreshed every 15–30 minutes. Use this to understand foot traffic patterns, compare locations, and plan staffing or promotions.</div>
   </div>
+
+  <!-- Live stats -->
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="sv" id="hs-total">—</div>
+      <div class="sl">pedestrians this hour</div>
+    </div>
+    <div class="stat-box">
+      <div class="sv" id="hs-sensors">—</div>
+      <div class="sl">active sensors</div>
+    </div>
+    <div class="stat-box">
+      <div class="sv" id="hs-vs" style="font-size:14px">—</div>
+      <div class="sl">vs typical <span id="hs-vs-label" style="color:var(--muted)"></span></div>
+    </div>
+  </div>
+
+  <!-- Decision card -->
+  <div class="decision-card">
+    <div class="ct">Right Now — Signals</div>
+    <div id="dc-rows">
+      <div class="dc-row">
+        <div class="dc-icon amber">⏳</div>
+        <div class="dc-body">
+          <div class="dc-label">Loading…</div>
+          <div class="dc-sub">Fetching data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hourly pattern chart -->
+  <div class="card">
+    <div class="ct">City-wide Hourly Pattern — <span id="chart-ref-date" style="color:var(--sub)"></span></div>
+    <div class="chart-wrap">
+      <div class="chart-bars" id="chart-bars"></div>
+      <div class="chart-xlabels">
+        <span class="chart-xlabel">12am</span>
+        <span class="chart-xlabel">6am</span>
+        <span class="chart-xlabel">12pm</span>
+        <span class="chart-xlabel">6pm</span>
+        <span class="chart-xlabel">11pm</span>
+      </div>
+    </div>
+    <div style="margin-top:10px;display:flex;gap:12px;align-items:center">
+      <div style="display:flex;align-items:center;gap:5px">
+        <div style="width:10px;height:10px;background:var(--amber);border-radius:2px;opacity:.5"></div>
+        <span style="font-size:10px;color:var(--sub)">Past hours</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:5px">
+        <div style="width:10px;height:10px;background:var(--amber);border-radius:2px"></div>
+        <span style="font-size:10px;color:var(--sub)">Current hour</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Peak insights -->
+  <div class="card">
+    <div class="ct">Peak Hour Insights — Yesterday</div>
+    <div id="peak-rows">
+      <div class="peak-row"><div class="peak-label">Loading…</div></div>
+    </div>
+  </div>
+
+  <!-- How to read map -->
+  <div class="card">
+    <div class="ct">Map Legend — Hex Intensity</div>
+    <div style="font-size:13px;color:var(--sub);font-weight:300;line-height:1.6;margin-bottom:8px">
+      Each sensor appears as a hexagon. Size and colour indicate foot traffic intensity:
+    </div>
+    <div class="lg-grid" id="home-legend"></div>
+  </div>
+
+  <!-- Data sources -->
+  <div class="card">
+    <div class="ct">Data Sources &amp; Method</div>
+    <div class="src-row">
+      <div class="src-dot"></div>
+      <div class="src-txt"><strong>Live counts</strong> — Pedestrian Counting System, past hour (per minute). <a href="https://data.melbourne.vic.gov.au" target="_blank">data.melbourne.vic.gov.au</a></div>
+    </div>
+    <div class="src-row">
+      <div class="src-dot"></div>
+      <div class="src-txt"><strong>Averages</strong> — Same hour, same day-of-week, over the last 4 weeks. Gives a like-for-like "typical Sunday at 11am" baseline.</div>
+    </div>
+    <div class="src-row">
+      <div class="src-dot"></div>
+      <div class="src-txt"><strong>Hourly profile &amp; peak hours</strong> — Full day of hourly data from yesterday. 137 active sensors across the City of Melbourne.</div>
+    </div>
+    <div class="src-row">
+      <div class="src-dot"></div>
+      <div class="src-txt"><strong>Refresh method</strong> — Python script on Windows Task Scheduler pushes a static JSON to GitHub. No live API calls from the browser.</div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--amber)" id="home-updated"></div>
+  </div>
+
+</div>
 </div>
 
-<!-- ── VIEW: MAP ────────────────────────────────────────────────────── -->
-<div class="view" id="view-map">
+<!-- ══ VIEW: MAP ════════════════════════════════════════════════════ -->
+<div class="view" id="vmap">
   <div id="map"></div>
-  <div id="map-legend">
-    <div class="ml-title">Pedestrians / hr</div>
-    <!-- Legend rows injected by JS -->
-  </div>
+  <div id="mleg"><div class="ml-t">Pedestrians / hr</div></div>
 </div>
 
-<!-- ── VIEW: RANKINGS ───────────────────────────────────────────────── -->
-<div class="view" id="view-rank">
-  <div class="rank-wrap">
-    <div class="rank-header">
-      <div class="rank-title">All sensors — ranked by count</div>
-      <div class="rank-total" id="rank-total-lbl"></div>
+<!-- ══ VIEW: RANKINGS ═══════════════════════════════════════════════ -->
+<div class="view" id="vrank">
+  <div class="rw">
+    <div class="rh">
+      <div class="rh-t">All sensors · ranked by current count</div>
+      <div class="rh-v" id="rank-total"></div>
     </div>
     <div id="rank-list"></div>
   </div>
@@ -334,27 +321,16 @@ nav {
 
 <!-- NAV -->
 <nav>
-  <button class="tab-btn active" data-tab="home" onclick="switchTab('home')">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-      <polyline points="9 22 9 12 15 12 15 22"/>
-    </svg>
+  <button class="tb active" data-tab="vhome" onclick="switchTab('vhome')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     Home
   </button>
-  <button class="tab-btn" data-tab="map" onclick="switchTab('map')">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
-      <line x1="8" y1="2" x2="8" y2="18"/>
-      <line x1="16" y1="6" x2="16" y2="22"/>
-    </svg>
+  <button class="tb" data-tab="vmap" onclick="switchTab('vmap')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
     Map
   </button>
-  <button class="tab-btn" data-tab="rank" onclick="switchTab('rank')">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="18" y1="20" x2="18" y2="10"/>
-      <line x1="12" y1="20" x2="12" y2="4"/>
-      <line x1="6" y1="20" x2="6" y2="14"/>
-    </svg>
+  <button class="tb" data-tab="vrank" onclick="switchTab('vrank')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     Rankings
   </button>
 </nav>
@@ -363,8 +339,7 @@ nav {
 <script>
 'use strict';
 
-// ── HEX HELPERS ──────────────────────────────────────────────────────
-// Pointy-top hexagon SVG — r = circumradius
+// ── HEX ──────────────────────────────────────────────────────────────
 function hexSVG(r, fill, stroke) {
   const pts = [];
   for (let i = 0; i < 6; i++) {
@@ -375,198 +350,313 @@ function hexSVG(r, fill, stroke) {
   return `<svg width="${d}" height="${d}" viewBox="0 0 ${d} ${d}" xmlns="http://www.w3.org/2000/svg"><polygon points="${pts.join(' ')}" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/></svg>`;
 }
 
-// Tier based on count — returns {fill, stroke, r} where r = circumradius
-function hexTier(count) {
-  if (count < 50)  return { fill:'#1a3a5c', stroke:'#3a6a9c', r:8  };
-  if (count < 150) return { fill:'#1d5a6e', stroke:'#3d9aae', r:11 };
-  if (count < 300) return { fill:'#b06010', stroke:'#d08030', r:14 };
-  if (count < 500) return { fill:'#c85010', stroke:'#e87030', r:17 };
-  return               { fill:'#d02828', stroke:'#f05050', r:21 };
+const TIERS = [
+  { max:50,   fill:'#1a3a5c', stroke:'#3a6a9c', r:8,  label:'< 50'    },
+  { max:150,  fill:'#1d5a6e', stroke:'#3d9aae', r:11, label:'50–150'  },
+  { max:300,  fill:'#b06010', stroke:'#d08030', r:14, label:'150–300' },
+  { max:500,  fill:'#c85010', stroke:'#e87030', r:17, label:'300–500' },
+  { max:Infinity, fill:'#d02828', stroke:'#f05050', r:21, label:'500+' },
+];
+
+function getTier(count) {
+  return TIERS.find(t => count < t.max) || TIERS[TIERS.length - 1];
 }
 
 function barColour(count) {
-  if (count < 50)  return '#3a6a9c';
-  if (count < 150) return '#3d9aae';
-  if (count < 300) return '#d08030';
-  if (count < 500) return '#e87030';
-  return '#f05050';
+  const t = getTier(count);
+  return t.stroke;
 }
 
 function fmtNum(n) {
-  if (n == null || n === undefined) return '—';
+  if (n == null) return '—';
   return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
 }
 
-function setLoad(pct, msg) {
-  document.getElementById('load-fill').style.width = pct + '%';
-  if (msg) document.getElementById('load-msg').textContent = msg;
+function fmtHour(h) {
+  if (h == null) return '—';
+  const suffix = h < 12 ? 'am' : 'pm';
+  const disp   = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  return `${disp}${suffix}`;
 }
 
-// ── MAP INIT ─────────────────────────────────────────────────────────
-const map = L.map('map', {
-  center: [-37.814, 144.963],
-  zoom: 15,
-  zoomControl: false,
-  attributionControl: false,
-});
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19 }).addTo(map);
-L.control.attribution({ prefix:false }).addAttribution('© OpenStreetMap · City of Melbourne').addTo(map);
-L.control.zoom({ position:'bottomright' }).addTo(map);
-
-// Build map legend
-(function() {
-  const tiers = [
-    { label:'< 50',    fill:'#1a3a5c', stroke:'#3a6a9c', r:7 },
-    { label:'50–150',  fill:'#1d5a6e', stroke:'#3d9aae', r:7 },
-    { label:'150–300', fill:'#b06010', stroke:'#d08030', r:7 },
-    { label:'300–500', fill:'#c85010', stroke:'#e87030', r:7 },
-    { label:'500+',    fill:'#d02828', stroke:'#f05050', r:7 },
-  ];
-  const leg = document.getElementById('map-legend');
-  leg.innerHTML = '<div class="ml-title">Pedestrians / hr</div>' +
-    tiers.map(t => `<div class="ml-row">${hexSVG(t.r, t.fill, t.stroke)}<div class="ml-label">${t.label}</div></div>`).join('');
-})();
+function setLoad(pct, msg) {
+  document.getElementById('ldfill').style.width = pct + '%';
+  if (msg) document.getElementById('ldmsg').textContent = msg;
+}
 
 // Build home legend
 (function() {
-  const tiers = [
-    { label:'< 50',    fill:'#1a3a5c', stroke:'#3a6a9c' },
-    { label:'50–150',  fill:'#1d5a6e', stroke:'#3d9aae' },
-    { label:'150–300', fill:'#b06010', stroke:'#d08030' },
-    { label:'300–500', fill:'#c85010', stroke:'#e87030' },
-    { label:'500+',    fill:'#d02828', stroke:'#f05050' },
-  ];
-  document.getElementById('home-legend').innerHTML = tiers.map(t =>
+  document.getElementById('home-legend').innerHTML = TIERS.map(t =>
     `<div class="lg-item">${hexSVG(12, t.fill, t.stroke)}<span>${t.label}</span></div>`
   ).join('');
 })();
 
-// ── STATE ────────────────────────────────────────────────────────────
-let markerStore = {};
+// ── MAP ───────────────────────────────────────────────────────────────
+const map = L.map('map', { center:[-37.814,144.963], zoom:15, zoomControl:false, attributionControl:false });
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19 }).addTo(map);
+L.control.attribution({ prefix:false }).addAttribution('© OpenStreetMap · City of Melbourne').addTo(map);
+L.control.zoom({ position:'bottomright' }).addTo(map);
 
-// ── TAB SWITCHING ────────────────────────────────────────────────────
-function switchTab(name) {
-  document.querySelectorAll('.view').forEach(v    => v.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('view-' + name).classList.add('active');
-  document.querySelector(`[data-tab="${name}"]`).classList.add('active');
-  if (name === 'map') setTimeout(() => map.invalidateSize(), 60);
+// Map legend
+(function() {
+  const leg = document.getElementById('mleg');
+  leg.innerHTML = '<div class="ml-t">Pedestrians / hr</div>' +
+    TIERS.map(t => `<div class="ml-r">${hexSVG(7, t.fill, t.stroke)}<div class="ml-l">${t.label}</div></div>`).join('');
+})();
+
+// ── STATE ─────────────────────────────────────────────────────────────
+let markers = {};
+
+// ── TABS ──────────────────────────────────────────────────────────────
+function switchTab(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tb').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector(`[data-tab="${id}"]`).classList.add('active');
+  if (id === 'vmap') setTimeout(() => map.invalidateSize(), 60);
 }
 window.switchTab = switchTab;
 
-// Fly to sensor — switches to map tab first
-window.flyToSensor = function(id) {
-  switchTab('map');
+window.flyTo = function(id) {
+  switchTab('vmap');
   setTimeout(() => {
-    const m = markerStore[id];
+    const m = markers[id];
     if (!m) return;
     map.flyTo(m.getLatLng(), 17, { duration:1 });
     setTimeout(() => m.openPopup(), 1150);
   }, 100);
 };
 
-// ── RENDER MAP ───────────────────────────────────────────────────────
+// ── RENDER MAP ────────────────────────────────────────────────────────
 function renderMap(data) {
-  Object.values(markerStore).forEach(m => map.removeLayer(m));
-  markerStore = {};
+  Object.values(markers).forEach(m => map.removeLayer(m));
+  markers = {};
 
   data.locations.forEach((loc, idx) => {
-    const tier = hexTier(loc.count);
+    const tier = getTier(loc.count);
     const d    = tier.r * 2;
     const icon = L.divIcon({
-      className:   'hex-marker',
+      className:   'hex-mk',
       html:        hexSVG(tier.r, tier.fill, tier.stroke),
       iconSize:    [d, d],
       iconAnchor:  [tier.r, tier.r],
       popupAnchor: [0, -(tier.r + 6)],
     });
 
-    let vsHTML = '';
+    let vsBadge = '';
     if (loc.vs_pct != null) {
       const cls  = loc.vs_pct > 10 ? 'up' : loc.vs_pct < -10 ? 'down' : 'flat';
       const sign = loc.vs_pct >= 0 ? '+' : '';
-      vsHTML = `<div class="popup-vs ${cls}">${sign}${loc.vs_pct}% vs avg</div>`;
+      vsBadge = `<div class="badge ${cls}">${sign}${loc.vs_pct}% vs avg</div>`;
+    }
+
+    let peakBadge = '';
+    if (loc.peak_hour != null) {
+      peakBadge = `<div class="badge flat">Peak ${fmtHour(loc.peak_hour)}</div>`;
     }
 
     const popup =
-      `<div class="popup-inner">` +
-        `<div class="popup-rank">Rank #${idx + 1} of ${data.locations.length}</div>` +
-        `<div class="popup-name">${loc.name}</div>` +
-        `<div class="popup-count">${fmtNum(loc.count)}</div>` +
-        `<div class="popup-unit">pedestrians this hour</div>` +
-        vsHTML +
+      `<div class="pop">` +
+        `<div class="pop-rank">Rank #${idx + 1} of ${data.locations.length}</div>` +
+        `<div class="pop-name">${loc.name}</div>` +
+        `<div class="pop-count">${fmtNum(loc.count)}</div>` +
+        `<div class="pop-unit">pedestrians this hour</div>` +
+        `<div class="pop-meta">${vsBadge}${peakBadge}</div>` +
       `</div>`;
 
     const marker = L.marker([loc.lat, loc.lng], { icon })
       .bindPopup(popup, { maxWidth:260, minWidth:240, autoPan:true });
-
     marker.addTo(map);
-    markerStore[loc.id] = marker;
+    markers[loc.id] = marker;
   });
 }
 
-// ── RENDER RANKINGS ──────────────────────────────────────────────────
+// ── RENDER CHART ──────────────────────────────────────────────────────
+function renderChart(data) {
+  const curve = data.hourly_curve;
+  if (!curve || !curve.length) return;
+
+  document.getElementById('chart-ref-date').textContent = data.ref_date || '';
+
+  const maxVal = Math.max(...curve.map(c => c.total), 1);
+  const curH   = data.current_hour;
+
+  document.getElementById('chart-bars').innerHTML = curve.map(c => {
+    const pct     = Math.round((c.total / maxVal) * 100);
+    const isCur   = c.hour === curH;
+    const opacity = c.hour > curH ? '0.25' : isCur ? '1' : '0.5';
+    const cls     = isCur ? ' current' : '';
+    return `<div class="chart-bar-col">
+      <div class="chart-bar${cls}" style="height:${pct}%;background:var(--amber);opacity:${opacity}"></div>
+    </div>`;
+  }).join('');
+}
+
+// ── RENDER PEAK INSIGHTS ──────────────────────────────────────────────
+function renderPeakInsights(data) {
+  const locs = data.locations;
+  if (!locs.length) return;
+
+  // Find city peak hour from hourly_curve
+  const curve = data.hourly_curve || [];
+  let peakH = null, peakTotal = 0;
+  curve.forEach(c => { if (c.total > peakTotal) { peakTotal = c.total; peakH = c.hour; }});
+
+  // Quietest hour
+  let quietH = null, quietTotal = Infinity;
+  curve.forEach(c => { if (c.total > 0 && c.total < quietTotal) { quietTotal = c.total; quietH = c.hour; }});
+
+  // Most sensors with peak_hour data
+  const peakCounts = {};
+  locs.forEach(l => {
+    if (l.peak_hour != null) peakCounts[l.peak_hour] = (peakCounts[l.peak_hour] || 0) + 1;
+  });
+  const commonPeak = Object.entries(peakCounts).sort((a,b) => b[1]-a[1])[0];
+
+  const rows = [];
+  if (peakH != null)   rows.push({ label: 'City peak hour (yesterday)',   val: fmtHour(peakH) + ` (${fmtNum(peakTotal)} peds)` });
+  if (quietH != null)  rows.push({ label: 'City quietest hour (yesterday)', val: fmtHour(quietH) });
+  if (commonPeak)      rows.push({ label: 'Most common sensor peak',       val: `${fmtHour(+commonPeak[0])} (${commonPeak[1]} sensors)` });
+  rows.push({ label: 'Busiest sensor right now',  val: locs[0]?.name?.replace(/\s*\(.*\)/,'').trim() || '—' });
+  rows.push({ label: 'Quietest sensor right now', val: locs[locs.length-1]?.name?.replace(/\s*\(.*\)/,'').trim() || '—' });
+
+  document.getElementById('peak-rows').innerHTML = rows.map(r =>
+    `<div class="peak-row"><div class="peak-label">${r.label}</div><div class="peak-val">${r.val}</div></div>`
+  ).join('');
+}
+
+// ── RENDER DECISION CARD ──────────────────────────────────────────────
+function renderDecision(data) {
+  const vs   = data.vs_total_pct;
+  const hour = data.current_hour;
+  const rows = [];
+
+  // Busyness signal
+  if (vs != null) {
+    if (vs >= 20) {
+      rows.push({ icon:'🔥', cls:'red',   label:'Significantly busier than usual', sub:`${vs}% above typical for this hour — peak conditions` });
+    } else if (vs >= 5) {
+      rows.push({ icon:'📈', cls:'green', label:'Busier than usual',               sub:`${vs}% above typical — good time to be staffed up` });
+    } else if (vs <= -20) {
+      rows.push({ icon:'📉', cls:'red',   label:'Significantly quieter than usual', sub:`${Math.abs(vs)}% below typical — low foot traffic period` });
+    } else if (vs <= -5) {
+      rows.push({ icon:'🔇', cls:'amber', label:'Quieter than usual',              sub:`${Math.abs(vs)}% below typical — lighter traffic expected` });
+    } else {
+      rows.push({ icon:'✅', cls:'green', label:'Normal traffic levels',           sub:`Within 5% of typical for this hour` });
+    }
+  } else {
+    rows.push({ icon:'📊', cls:'amber', label:'Comparison data loading',          sub:'Average will appear once 4-week baseline is available' });
+  }
+
+  // Time-of-day signal from hourly curve
+  const curve = data.hourly_curve || [];
+  const maxH  = curve.reduce((a,c) => c.total > a.total ? c : a, {total:0,hour:0});
+  if (maxH.hour != null) {
+    const isNearPeak = Math.abs(hour - maxH.hour) <= 1;
+    if (isNearPeak) {
+      rows.push({ icon:'⏰', cls:'red',   label:'Near peak trading hour',          sub:`City peak was ${fmtHour(maxH.hour)} yesterday — traffic expected to be high` });
+    } else if (hour >= 6 && hour <= 9) {
+      rows.push({ icon:'🌅', cls:'amber', label:'Morning commute period',          sub:'Foot traffic building — mostly commuters, not retail browsers' });
+    } else if (hour >= 11 && hour <= 14) {
+      rows.push({ icon:'🍽️', cls:'green', label:'Lunch window active',             sub:'Highest retail conversion period — prime time for promotions' });
+    } else if (hour >= 17 && hour <= 19) {
+      rows.push({ icon:'🌆', cls:'amber', label:'Evening commute period',          sub:'High volume but commuter-focused — foot traffic winding down' });
+    } else if (hour < 7 || hour > 21) {
+      rows.push({ icon:'🌙', cls:'amber', label:'Off-peak hours',                 sub:'Low foot traffic expected at this time' });
+    }
+  }
+
+  // Top sensor signal
+  const top = data.locations[0];
+  if (top) {
+    rows.push({ icon:'📍', cls:'amber', label:`Busiest: ${top.name.replace(/\s*\(.*\)/,'').trim()}`, sub:`${fmtNum(top.count)} pedestrians this hour` });
+  }
+
+  document.getElementById('dc-rows').innerHTML = rows.map(r =>
+    `<div class="dc-row">
+      <div class="dc-icon ${r.cls}">${r.icon}</div>
+      <div class="dc-body">
+        <div class="dc-label">${r.label}</div>
+        <div class="dc-sub">${r.sub}</div>
+      </div>
+    </div>`
+  ).join('');
+}
+
+// ── RENDER HOME STATS ─────────────────────────────────────────────────
+function renderHome(data) {
+  document.getElementById('hs-total').textContent   = fmtNum(data.total_now);
+  document.getElementById('hs-sensors').textContent = data.sensor_count;
+
+  const vsEl    = document.getElementById('hs-vs');
+  const vsLabel = document.getElementById('hs-vs-label');
+  if (data.vs_total_pct != null) {
+    const sign = data.vs_total_pct >= 0 ? '+' : '';
+    vsEl.textContent   = sign + data.vs_total_pct + '%';
+    vsEl.style.color   = data.vs_total_pct > 10 ? 'var(--green)' : data.vs_total_pct < -10 ? 'var(--red)' : 'var(--amber)';
+    vsLabel.textContent = 'this hour';
+  } else {
+    vsEl.textContent   = 'n/a';
+    vsEl.style.color   = 'var(--muted)';
+    vsLabel.textContent = '';
+  }
+
+  const upd = document.getElementById('home-updated');
+  if (upd) upd.textContent = 'Last updated: ' + data.fetched_at_local;
+
+  document.getElementById('hdr-fresh').innerHTML =
+    'as at&nbsp;<strong>' + data.fetched_at_local + '</strong>';
+}
+
+// ── RENDER RANKINGS ───────────────────────────────────────────────────
 function renderRankings(data) {
-  document.getElementById('rank-total-lbl').textContent = fmtNum(data.total_now) + ' total';
-  const maxCount = data.locations[0]?.count || 1;
+  document.getElementById('rank-total').textContent = fmtNum(data.total_now) + ' total';
+  const maxC = data.locations[0]?.count || 1;
 
   document.getElementById('rank-list').innerHTML = data.locations.map((loc, i) => {
-    const barPct = Math.round((loc.count / maxCount) * 100);
+    const pct    = Math.round((loc.count / maxC) * 100);
     const colour = barColour(loc.count);
     const top3   = i < 3 ? ' top3' : '';
 
-    let vsHTML = '';
+    let vsBadge = '';
     if (loc.vs_pct != null) {
       const cls  = loc.vs_pct > 10 ? 'up' : loc.vs_pct < -10 ? 'down' : 'flat';
       const sign = loc.vs_pct >= 0 ? '+' : '';
-      vsHTML = `<div class="rank-vs ${cls}">${sign}${loc.vs_pct}%</div>`;
+      vsBadge = `<div class="badge ${cls}" style="font-size:9px;padding:1px 5px">${sign}${loc.vs_pct}%</div>`;
     }
 
+    const peakTxt = loc.peak_hour != null
+      ? `<div class="rpeak">Peak ${fmtHour(loc.peak_hour)}</div>`
+      : '';
+
     return (
-      `<div class="rank-item${top3}" onclick="flyToSensor('${loc.id}')">` +
-        `<div class="rank-num">${i + 1}</div>` +
-        `<div class="rank-body">` +
-          `<div class="rank-name" title="${loc.name}">${loc.name}</div>` +
-          `<div class="rank-bar-track"><div class="rank-bar-fill" style="width:${barPct}%;background:${colour}"></div></div>` +
+      `<div class="ri${top3}" onclick="flyTo('${loc.id}')">` +
+        `<div class="rn">${i + 1}</div>` +
+        `<div class="rb">` +
+          `<div class="rb-name" title="${loc.name}">${loc.name}</div>` +
+          `<div class="rb-track"><div class="rb-fill" style="width:${pct}%;background:${colour}"></div></div>` +
         `</div>` +
-        `<div class="rank-right">` +
-          `<div class="rank-count">${fmtNum(loc.count)}</div>` +
-          vsHTML +
+        `<div class="rr">` +
+          `<div class="rc">${fmtNum(loc.count)}</div>` +
+          vsBadge +
+          peakTxt +
         `</div>` +
       `</div>`
     );
   }).join('');
 }
 
-// ── RENDER HOME ──────────────────────────────────────────────────────
-function renderHome(data) {
-  document.getElementById('hs-total').textContent   = fmtNum(data.total_now);
-  document.getElementById('hs-sensors').textContent = data.sensor_count;
-
-  const top = data.locations[0];
-  if (top) {
-    const short = top.name.replace(/\s*[-–]\s*\w.*$/, '').replace(/\s*\(.*\)/, '').trim();
-    const el    = document.getElementById('hs-top');
-    el.textContent  = short;
-    el.style.fontSize = short.length > 14 ? '12px' : short.length > 10 ? '14px' : '19px';
-  }
-
-  const upEl = document.getElementById('home-updated');
-  if (upEl) upEl.textContent = 'Last updated: ' + data.fetched_at_local;
-
-  document.getElementById('hdr-freshness').innerHTML =
-    'Data as at&nbsp;<strong>' + data.fetched_at_local + '</strong>';
-}
-
-// ── MASTER RENDER ────────────────────────────────────────────────────
+// ── MASTER RENDER ─────────────────────────────────────────────────────
 function render(data) {
   renderHome(data);
+  renderDecision(data);
+  renderChart(data);
+  renderPeakInsights(data);
   renderMap(data);
   renderRankings(data);
 }
 
-// ── LOAD JSON ────────────────────────────────────────────────────────
+// ── LOAD ──────────────────────────────────────────────────────────────
 async function loadData() {
   setLoad(20, 'Loading foot-traffic.json…');
   try {
@@ -584,12 +674,12 @@ async function loadData() {
     setTimeout(() => document.getElementById('loading').classList.add('hide'), 400);
 
   } catch (err) {
-    console.error('loadData:', err);
-    document.getElementById('load-msg').textContent =
-      '⚠ ' + (err.message.includes('404') || err.message.includes('HTTP')
+    console.error(err);
+    document.getElementById('ldmsg').textContent =
+      '⚠ ' + (err.message.includes('HTTP')
         ? 'foot-traffic.json not found — run fetch.py first'
-        : 'Load error: ' + err.message);
-    document.getElementById('load-fill').style.background = '#e8453c';
+        : 'Error: ' + err.message);
+    document.getElementById('ldfill').style.background = '#e8453c';
   }
 }
 
