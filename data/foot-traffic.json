@@ -1,12 +1,12 @@
 {
-  "fetched_at": "2026-03-31T00:17:20Z",
-  "fetched_at_local": "31 Mar 2026 11:17",
+  "fetched_at": "2026-03-31T00:47:20Z",
+  "fetched_at_local": "31 Mar 2026 11:47",
   "ref_date": "2026-03-30",
   "current_hour": 0,
   "sensor_count": 94,
-  "total_now": 48322,
+  "total_now": 48341,
   "total_avg": 3337,
-  "vs_total_pct": 1348,
+  "vs_total_pct": 1349,
   "hourly_curve": [
     {
       "hour": 0,
@@ -337,6 +337,16 @@
       "peak_hour": 0
     },
     {
+      "id": "3",
+      "name": "Melbourne Central",
+      "lat": -37.81101524,
+      "lng": 144.96429485,
+      "count": 700,
+      "avg": 148,
+      "vs_pct": 373,
+      "peak_hour": 0
+    },
+    {
       "id": "79",
       "name": "Flinders St (South)",
       "lat": -37.81794046,
@@ -344,16 +354,6 @@
       "count": 688,
       "avg": 67,
       "vs_pct": 927,
-      "peak_hour": 0
-    },
-    {
-      "id": "3",
-      "name": "Melbourne Central",
-      "lat": -37.81101524,
-      "lng": 144.96429485,
-      "count": 681,
-      "avg": 148,
-      "vs_pct": 360,
       "peak_hour": 0
     },
     {
