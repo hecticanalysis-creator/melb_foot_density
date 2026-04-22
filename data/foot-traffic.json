@@ -1,12 +1,12 @@
 {
-  "fetched_at": "2026-04-22T07:00:20Z",
-  "fetched_at_local": "22 Apr 2026 17:00",
+  "fetched_at": "2026-04-22T07:30:18Z",
+  "fetched_at_local": "22 Apr 2026 17:30",
   "ref_date": "2026-04-21",
   "current_hour": 7,
   "sensor_count": 92,
-  "total_now": 42650,
+  "total_now": 42496,
   "total_avg": 23760,
-  "vs_total_pct": 80,
+  "vs_total_pct": 79,
   "hourly_curve": [
     {
       "hour": 0,
@@ -217,16 +217,6 @@
       "peak_hour": 0
     },
     {
-      "id": "4",
-      "name": "Town Hall (West)",
-      "lat": -37.81487988,
-      "lng": 144.9660878,
-      "count": 1034,
-      "avg": 490,
-      "vs_pct": 111,
-      "peak_hour": 0
-    },
-    {
       "id": "133",
       "name": "I-Hub Southern Cross Station - Lonsdale Street Entrance - South",
       "lat": -37.81531435,
@@ -234,6 +224,16 @@
       "count": 1006,
       "avg": 940,
       "vs_pct": 7,
+      "peak_hour": 0
+    },
+    {
+      "id": "4",
+      "name": "Town Hall (West)",
+      "lat": -37.81487988,
+      "lng": 144.9660878,
+      "count": 951,
+      "avg": 490,
+      "vs_pct": 94,
       "peak_hour": 0
     },
     {
@@ -317,16 +317,6 @@
       "peak_hour": 0
     },
     {
-      "id": "3",
-      "name": "Melbourne Central",
-      "lat": -37.81101524,
-      "lng": 144.96429485,
-      "count": 683,
-      "avg": 263,
-      "vs_pct": 160,
-      "peak_hour": 0
-    },
-    {
       "id": "185",
       "name": "197 Elizabeth Street",
       "lat": -37.81374643,
@@ -387,6 +377,16 @@
       "peak_hour": 0
     },
     {
+      "id": "3",
+      "name": "Melbourne Central",
+      "lat": -37.81101524,
+      "lng": 144.96429485,
+      "count": 570,
+      "avg": 263,
+      "vs_pct": 117,
+      "peak_hour": 0
+    },
+    {
       "id": "61",
       "name": "RMIT Building 14",
       "lat": -37.80767455,
@@ -427,6 +427,16 @@
       "peak_hour": 0
     },
     {
+      "id": "40",
+      "name": "Lonsdale St-Spring St (West)",
+      "lat": -37.80999341,
+      "lng": 144.97227587,
+      "count": 413,
+      "avg": 196,
+      "vs_pct": 111,
+      "peak_hour": 0
+    },
+    {
       "id": "143",
       "name": "Mounted on Toilet - Spencer Street, Batman Park",
       "lat": -37.821728,
@@ -434,16 +444,6 @@
       "count": 396,
       "avg": 289,
       "vs_pct": 37,
-      "peak_hour": 0
-    },
-    {
-      "id": "40",
-      "name": "Lonsdale St-Spring St (West)",
-      "lat": -37.80999341,
-      "lng": 144.97227587,
-      "count": 380,
-      "avg": 196,
-      "vs_pct": 94,
       "peak_hour": 0
     },
     {
@@ -741,9 +741,9 @@
       "name": "Alfred Place",
       "lat": -37.81379749,
       "lng": 144.96995745,
-      "count": 154,
+      "count": 163,
       "avg": 72,
-      "vs_pct": 114,
+      "vs_pct": 126,
       "peak_hour": 3
     },
     {
