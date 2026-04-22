@@ -1,12 +1,12 @@
 {
-  "fetched_at": "2026-04-22T01:00:20Z",
-  "fetched_at_local": "22 Apr 2026 11:00",
+  "fetched_at": "2026-04-22T01:30:18Z",
+  "fetched_at_local": "22 Apr 2026 11:30",
   "ref_date": "2026-04-21",
   "current_hour": 1,
   "sensor_count": 92,
-  "total_now": 42596,
+  "total_now": 42638,
   "total_avg": 2584,
-  "vs_total_pct": 1548,
+  "vs_total_pct": 1550,
   "hourly_curve": [
     {
       "hour": 0,
@@ -217,6 +217,16 @@
       "peak_hour": 0
     },
     {
+      "id": "4",
+      "name": "Town Hall (West)",
+      "lat": -37.81487988,
+      "lng": 144.9660878,
+      "count": 1094,
+      "avg": 114,
+      "vs_pct": 860,
+      "peak_hour": 0
+    },
+    {
       "id": "133",
       "name": "I-Hub Southern Cross Station - Lonsdale Street Entrance - South",
       "lat": -37.81531435,
@@ -224,16 +234,6 @@
       "count": 1006,
       "avg": 39,
       "vs_pct": 2479,
-      "peak_hour": 0
-    },
-    {
-      "id": "4",
-      "name": "Town Hall (West)",
-      "lat": -37.81487988,
-      "lng": 144.9660878,
-      "count": 951,
-      "avg": 114,
-      "vs_pct": 734,
       "peak_hour": 0
     },
     {
@@ -317,16 +317,6 @@
       "peak_hour": 0
     },
     {
-      "id": "3",
-      "name": "Melbourne Central",
-      "lat": -37.81101524,
-      "lng": 144.96429485,
-      "count": 712,
-      "avg": 148,
-      "vs_pct": 381,
-      "peak_hour": 0
-    },
-    {
       "id": "185",
       "name": "197 Elizabeth Street",
       "lat": -37.81374643,
@@ -364,6 +354,16 @@
       "count": 627,
       "avg": 55,
       "vs_pct": 1040,
+      "peak_hour": 0
+    },
+    {
+      "id": "3",
+      "name": "Melbourne Central",
+      "lat": -37.81101524,
+      "lng": 144.96429485,
+      "count": 611,
+      "avg": 148,
+      "vs_pct": 313,
       "peak_hour": 0
     },
     {
