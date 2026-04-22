@@ -1,12 +1,12 @@
 {
-  "fetched_at": "2026-04-22T18:00:20Z",
-  "fetched_at_local": "23 Apr 2026 04:00",
+  "fetched_at": "2026-04-22T18:30:17Z",
+  "fetched_at_local": "23 Apr 2026 04:30",
   "ref_date": "2026-04-21",
   "current_hour": 18,
   "sensor_count": 88,
-  "total_now": 9482,
+  "total_now": 10001,
   "total_avg": 67716,
-  "vs_total_pct": -86,
+  "vs_total_pct": -85,
   "hourly_curve": [
     {
       "hour": 0,
@@ -111,9 +111,9 @@
       "name": "368 Elizabeth Street",
       "lat": -37.81009465,
       "lng": 144.96143149,
-      "count": 681,
+      "count": 713,
       "avg": 2489,
-      "vs_pct": -73,
+      "vs_pct": -71,
       "peak_hour": 17
     },
     {
@@ -121,8 +121,18 @@
       "name": "Melbourne Central",
       "lat": -37.81101524,
       "lng": 144.96429485,
-      "count": 418,
+      "count": 428,
       "avg": 2957,
+      "vs_pct": -86,
+      "peak_hour": 17
+    },
+    {
+      "id": "41",
+      "name": "Flinders La-Swanston St (West)",
+      "lat": -37.81668634,
+      "lng": 144.96689733,
+      "count": 427,
+      "avg": 3046,
       "vs_pct": -86,
       "peak_hour": 17
     },
@@ -131,29 +141,19 @@
       "name": "QVM-Therry St (South)",
       "lat": -37.80730068,
       "lng": 144.95956055,
-      "count": 372,
+      "count": 403,
       "avg": 721,
-      "vs_pct": -48,
+      "vs_pct": -44,
       "peak_hour": 12
-    },
-    {
-      "id": "41",
-      "name": "Flinders La-Swanston St (West)",
-      "lat": -37.81668634,
-      "lng": 144.96689733,
-      "count": 368,
-      "avg": 3046,
-      "vs_pct": -88,
-      "peak_hour": 17
     },
     {
       "id": "30",
       "name": "Lonsdale St (South)",
       "lat": -37.8112185,
       "lng": 144.96656806,
-      "count": 359,
+      "count": 383,
       "avg": 878,
-      "vs_pct": -59,
+      "vs_pct": -56,
       "peak_hour": 13
     },
     {
@@ -161,19 +161,9 @@
       "name": "197 Elizabeth Street",
       "lat": -37.81374643,
       "lng": 144.96276183,
-      "count": 304,
+      "count": 329,
       "avg": 1394,
-      "vs_pct": -78,
-      "peak_hour": 13
-    },
-    {
-      "id": "4",
-      "name": "Town Hall (West)",
-      "lat": -37.81487988,
-      "lng": 144.9660878,
-      "count": 302,
-      "avg": 3302,
-      "vs_pct": -91,
+      "vs_pct": -76,
       "peak_hour": 13
     },
     {
@@ -181,59 +171,29 @@
       "name": "Building 80 RMIT",
       "lat": -37.80825648,
       "lng": 144.96304859,
-      "count": 299,
+      "count": 314,
       "avg": 2146,
-      "vs_pct": -86,
+      "vs_pct": -85,
       "peak_hour": 0
+    },
+    {
+      "id": "4",
+      "name": "Town Hall (West)",
+      "lat": -37.81487988,
+      "lng": 144.9660878,
+      "count": 306,
+      "avg": 3302,
+      "vs_pct": -91,
+      "peak_hour": 13
     },
     {
       "id": "45",
       "name": "Little Collins St-Swanston St (East)",
       "lat": -37.81414075,
       "lng": 144.96609379,
-      "count": 260,
+      "count": 278,
       "avg": 1894,
-      "vs_pct": -86,
-      "peak_hour": 17
-    },
-    {
-      "id": "162",
-      "name": "iHub 489 Elizabeth Street",
-      "lat": -37.80740397,
-      "lng": 144.95987909,
-      "count": 253,
-      "avg": 948,
-      "vs_pct": -73,
-      "peak_hour": 12
-    },
-    {
-      "id": "84",
-      "name": "Elizabeth St - Flinders St (East) - New footpath",
-      "lat": -37.81798049,
-      "lng": 144.96503383,
-      "count": 250,
-      "avg": 2502,
-      "vs_pct": -90,
-      "peak_hour": 17
-    },
-    {
-      "id": "62",
-      "name": "La Trobe St (North)",
-      "lat": -37.80996494,
-      "lng": 144.96216521,
-      "count": 247,
-      "avg": 747,
-      "vs_pct": -67,
-      "peak_hour": 17
-    },
-    {
-      "id": "47",
-      "name": "Melbourne Central-Elizabeth St (East)",
-      "lat": -37.81258467,
-      "lng": 144.9625775,
-      "count": 247,
-      "avg": 1723,
-      "vs_pct": -86,
+      "vs_pct": -85,
       "peak_hour": 17
     },
     {
@@ -241,9 +201,49 @@
       "name": "Princes Bridge",
       "lat": -37.81874249,
       "lng": 144.96787656,
-      "count": 245,
+      "count": 275,
       "avg": null,
       "vs_pct": null,
+      "peak_hour": 17
+    },
+    {
+      "id": "162",
+      "name": "iHub 489 Elizabeth Street",
+      "lat": -37.80740397,
+      "lng": 144.95987909,
+      "count": 264,
+      "avg": 948,
+      "vs_pct": -72,
+      "peak_hour": 12
+    },
+    {
+      "id": "84",
+      "name": "Elizabeth St - Flinders St (East) - New footpath",
+      "lat": -37.81798049,
+      "lng": 144.96503383,
+      "count": 263,
+      "avg": 2502,
+      "vs_pct": -89,
+      "peak_hour": 17
+    },
+    {
+      "id": "47",
+      "name": "Melbourne Central-Elizabeth St (East)",
+      "lat": -37.81258467,
+      "lng": 144.9625775,
+      "count": 257,
+      "avg": 1723,
+      "vs_pct": -85,
+      "peak_hour": 17
+    },
+    {
+      "id": "62",
+      "name": "La Trobe St (North)",
+      "lat": -37.80996494,
+      "lng": 144.96216521,
+      "count": 253,
+      "avg": 747,
+      "vs_pct": -66,
       "peak_hour": 17
     },
     {
@@ -251,17 +251,27 @@
       "name": "Chinatown-Swanston St (North)",
       "lat": -37.81237202,
       "lng": 144.96550671,
-      "count": 245,
+      "count": 246,
       "avg": 1320,
       "vs_pct": -81,
       "peak_hour": 18
+    },
+    {
+      "id": "79",
+      "name": "Flinders St (South)",
+      "lat": -37.81794046,
+      "lng": 144.96616678,
+      "count": 234,
+      "avg": 858,
+      "vs_pct": -73,
+      "peak_hour": 17
     },
     {
       "id": "6",
       "name": "Flinders Street Station Underpass",
       "lat": -37.81911705,
       "lng": 144.96558255,
-      "count": 229,
+      "count": 233,
       "avg": 2068,
       "vs_pct": -89,
       "peak_hour": 8
@@ -271,9 +281,9 @@
       "name": "Bourke St - Spencer St (North)",
       "lat": -37.81686075,
       "lng": 144.95358075,
-      "count": 224,
+      "count": 232,
       "avg": 1057,
-      "vs_pct": -79,
+      "vs_pct": -78,
       "peak_hour": 23
     },
     {
@@ -281,27 +291,17 @@
       "name": "163 King Street",
       "lat": -37.81627451,
       "lng": 144.95550503,
-      "count": 223,
+      "count": 232,
       "avg": 615,
-      "vs_pct": -64,
+      "vs_pct": -62,
       "peak_hour": 12
-    },
-    {
-      "id": "79",
-      "name": "Flinders St (South)",
-      "lat": -37.81794046,
-      "lng": 144.96616678,
-      "count": 222,
-      "avg": 858,
-      "vs_pct": -74,
-      "peak_hour": 17
     },
     {
       "id": "66",
       "name": "State Library - New",
       "lat": -37.81057846,
       "lng": 144.96444294,
-      "count": 207,
+      "count": 221,
       "avg": 3046,
       "vs_pct": -93,
       "peak_hour": 17
@@ -311,9 +311,9 @@
       "name": "I-Hub Southern Cross Station - Bourke Street Entrance - North",
       "lat": -37.81694221,
       "lng": 144.95303935,
-      "count": 193,
+      "count": 204,
       "avg": 995,
-      "vs_pct": -81,
+      "vs_pct": -79,
       "peak_hour": 17
     },
     {
@@ -321,19 +321,9 @@
       "name": "Spencer St-Collins St (North)",
       "lat": -37.81887963,
       "lng": 144.95449198,
-      "count": 176,
+      "count": 186,
       "avg": 1642,
       "vs_pct": -89,
-      "peak_hour": 17
-    },
-    {
-      "id": "143",
-      "name": "Mounted on Toilet - Spencer Street, Batman Park",
-      "lat": -37.821728,
-      "lng": 144.95557015,
-      "count": 176,
-      "avg": 512,
-      "vs_pct": -66,
       "peak_hour": 17
     },
     {
@@ -341,19 +331,39 @@
       "name": "124 Elizabeth Street",
       "lat": -37.81512416,
       "lng": 144.96371988,
-      "count": 171,
+      "count": 184,
       "avg": 1575,
-      "vs_pct": -89,
+      "vs_pct": -88,
       "peak_hour": 13
+    },
+    {
+      "id": "143",
+      "name": "Mounted on Toilet - Spencer Street, Batman Park",
+      "lat": -37.821728,
+      "lng": 144.95557015,
+      "count": 182,
+      "avg": 512,
+      "vs_pct": -64,
+      "peak_hour": 17
+    },
+    {
+      "id": "135",
+      "name": "I-Hub Southern Cross Station - Bourke Street Entrance - South",
+      "lat": -37.8172861,
+      "lng": 144.95319102,
+      "count": 152,
+      "avg": 708,
+      "vs_pct": -79,
+      "peak_hour": 17
     },
     {
       "id": "21",
       "name": "155-161 Russell Street",
       "lat": -37.81267313,
       "lng": 144.96788288,
-      "count": 145,
+      "count": 148,
       "avg": 942,
-      "vs_pct": -85,
+      "vs_pct": -84,
       "peak_hour": 13
     },
     {
@@ -361,27 +371,17 @@
       "name": "231 Bourke St",
       "lat": -37.81333081,
       "lng": 144.96675571,
-      "count": 141,
+      "count": 146,
       "avg": 894,
       "vs_pct": -84,
       "peak_hour": 13
-    },
-    {
-      "id": "135",
-      "name": "I-Hub Southern Cross Station - Bourke Street Entrance - South",
-      "lat": -37.8172861,
-      "lng": 144.95319102,
-      "count": 136,
-      "avg": 708,
-      "vs_pct": -81,
-      "peak_hour": 17
     },
     {
       "id": "61",
       "name": "RMIT Building 14",
       "lat": -37.80767455,
       "lng": 144.96309114,
-      "count": 135,
+      "count": 137,
       "avg": 1077,
       "vs_pct": -87,
       "peak_hour": 12
@@ -391,9 +391,9 @@
       "name": "I-Hub Southern Cross Station - Lonsdale Street Entrance - South",
       "lat": -37.81531435,
       "lng": 144.95227769,
-      "count": 127,
+      "count": 131,
       "avg": 1338,
-      "vs_pct": -91,
+      "vs_pct": -90,
       "peak_hour": 17
     },
     {
@@ -401,9 +401,9 @@
       "name": "Southbank",
       "lat": -37.82018685,
       "lng": 144.96508508,
-      "count": 121,
+      "count": 124,
       "avg": 2206,
-      "vs_pct": -95,
+      "vs_pct": -94,
       "peak_hour": 17
     },
     {
@@ -411,9 +411,9 @@
       "name": "Lonsdale St - Elizabeth St (North)",
       "lat": -37.81234775,
       "lng": 144.96153311,
-      "count": 116,
+      "count": 122,
       "avg": 952,
-      "vs_pct": -88,
+      "vs_pct": -87,
       "peak_hour": 13
     },
     {
@@ -421,39 +421,39 @@
       "name": "William St - Little Lonsdale St (West)",
       "lat": -37.81295822,
       "lng": 144.95678789,
-      "count": 114,
+      "count": 117,
       "avg": 816,
       "vs_pct": -86,
       "peak_hour": 8
-    },
-    {
-      "id": "132",
-      "name": "I-Hub Corner of King Street and Latrobe Street (317-335 King)",
-      "lat": -37.81267639,
-      "lng": 144.95386444,
-      "count": 104,
-      "avg": 406,
-      "vs_pct": -74,
-      "peak_hour": 17
     },
     {
       "id": "20",
       "name": "Chinatown-Lt Bourke St (South)",
       "lat": -37.81172914,
       "lng": 144.9682466,
-      "count": 103,
+      "count": 107,
       "avg": 942,
       "vs_pct": -89,
       "peak_hour": 18
+    },
+    {
+      "id": "132",
+      "name": "I-Hub Corner of King Street and Latrobe Street (317-335 King)",
+      "lat": -37.81267639,
+      "lng": 144.95386444,
+      "count": 107,
+      "avg": 406,
+      "vs_pct": -74,
+      "peak_hour": 17
     },
     {
       "id": "131",
       "name": "I-Hub Corner of King Street and Flinders Street (2-6 King)",
       "lat": -37.82009057,
       "lng": 144.95758725,
-      "count": 98,
+      "count": 104,
       "avg": 198,
-      "vs_pct": -51,
+      "vs_pct": -47,
       "peak_hour": 13
     },
     {
@@ -461,29 +461,29 @@
       "name": "Bourke Street Mall (South)",
       "lat": -37.81380668,
       "lng": 144.96516718,
-      "count": 95,
+      "count": 99,
       "avg": 1218,
       "vs_pct": -92,
       "peak_hour": 13
-    },
-    {
-      "id": "109",
-      "name": "La Trobe St- William St (South)",
-      "lat": -37.81193681,
-      "lng": 144.95621105,
-      "count": 92,
-      "avg": 373,
-      "vs_pct": -75,
-      "peak_hour": 17
     },
     {
       "id": "25",
       "name": "Melbourne Convention Exhibition Centre",
       "lat": -37.82401776,
       "lng": 144.95604426,
-      "count": 88,
+      "count": 97,
       "avg": 1038,
-      "vs_pct": -92,
+      "vs_pct": -91,
+      "peak_hour": 17
+    },
+    {
+      "id": "109",
+      "name": "La Trobe St- William St (South)",
+      "lat": -37.81193681,
+      "lng": 144.95621105,
+      "count": 95,
+      "avg": 373,
+      "vs_pct": -75,
       "peak_hour": 17
     },
     {
@@ -491,9 +491,9 @@
       "name": "Awning of Nationwide Parking 474 Flinders Street",
       "lat": -37.81997273,
       "lng": 144.95834911,
-      "count": 80,
+      "count": 86,
       "avg": 281,
-      "vs_pct": -72,
+      "vs_pct": -69,
       "peak_hour": 12
     },
     {
@@ -511,17 +511,27 @@
       "name": "Collins Street (North)",
       "lat": -37.81564191,
       "lng": 144.965499,
-      "count": 68,
+      "count": 69,
       "avg": 963,
       "vs_pct": -93,
       "peak_hour": 12
+    },
+    {
+      "id": "17",
+      "name": "Collins Place (South)",
+      "lat": -37.81362543,
+      "lng": 144.97323591,
+      "count": 62,
+      "avg": 638,
+      "vs_pct": -90,
+      "peak_hour": 8
     },
     {
       "id": "23",
       "name": "Spencer St-Collins St (South)",
       "lat": -37.81909256,
       "lng": 144.95452748,
-      "count": 60,
+      "count": 62,
       "avg": 606,
       "vs_pct": -90,
       "peak_hour": 12
@@ -531,10 +541,20 @@
       "name": "Flinders Ln -Degraves St (South)",
       "lat": -37.81688755,
       "lng": 144.96562569,
-      "count": 58,
+      "count": 60,
       "avg": 918,
-      "vs_pct": -94,
+      "vs_pct": -93,
       "peak_hour": 12
+    },
+    {
+      "id": "107",
+      "name": "Flagstaff station (East)",
+      "lat": -37.81246271,
+      "lng": 144.95690188,
+      "count": 59,
+      "avg": 262,
+      "vs_pct": -77,
+      "peak_hour": 13
     },
     {
       "id": "43",
@@ -547,33 +567,13 @@
       "peak_hour": 17
     },
     {
-      "id": "107",
-      "name": "Flagstaff station (East)",
-      "lat": -37.81246271,
-      "lng": 144.95690188,
-      "count": 55,
-      "avg": 262,
-      "vs_pct": -79,
-      "peak_hour": 13
-    },
-    {
-      "id": "17",
-      "name": "Collins Place (South)",
-      "lat": -37.81362543,
-      "lng": 144.97323591,
-      "count": 54,
-      "avg": 638,
-      "vs_pct": -92,
-      "peak_hour": 8
-    },
-    {
       "id": "29",
       "name": "St Kilda Rd-Alexandra Gardens",
       "lat": -37.8199817,
       "lng": 144.96872865,
-      "count": 49,
+      "count": 50,
       "avg": 520,
-      "vs_pct": -91,
+      "vs_pct": -90,
       "peak_hour": 17
     },
     {
@@ -581,10 +581,20 @@
       "name": "Queen St (West)",
       "lat": -37.81652527,
       "lng": 144.96121062,
-      "count": 41,
+      "count": 46,
       "avg": 352,
-      "vs_pct": -88,
+      "vs_pct": -87,
       "peak_hour": 12
+    },
+    {
+      "id": "31",
+      "name": "Lygon St (West)",
+      "lat": -37.80169681,
+      "lng": 144.96658911,
+      "count": 43,
+      "avg": 376,
+      "vs_pct": -89,
+      "peak_hour": 13
     },
     {
       "id": "72",
@@ -595,16 +605,6 @@
       "avg": 617,
       "vs_pct": -93,
       "peak_hour": 17
-    },
-    {
-      "id": "31",
-      "name": "Lygon St (West)",
-      "lat": -37.80169681,
-      "lng": 144.96658911,
-      "count": 40,
-      "avg": 376,
-      "vs_pct": -89,
-      "peak_hour": 13
     },
     {
       "id": "44",
@@ -631,37 +631,37 @@
       "name": "Grattan St-Swanston St (West)",
       "lat": -37.80008566,
       "lng": 144.96386412,
-      "count": 34,
+      "count": 35,
       "avg": 340,
       "vs_pct": -90,
       "peak_hour": 13
-    },
-    {
-      "id": "40",
-      "name": "Lonsdale St-Spring St (West)",
-      "lat": -37.80999341,
-      "lng": 144.97227587,
-      "count": 32,
-      "avg": 476,
-      "vs_pct": -93,
-      "peak_hour": 12
     },
     {
       "id": "37",
       "name": "Lygon St (East)",
       "lat": -37.80107122,
       "lng": 144.96704554,
-      "count": 30,
+      "count": 34,
       "avg": 279,
-      "vs_pct": -89,
+      "vs_pct": -88,
       "peak_hour": 18
+    },
+    {
+      "id": "40",
+      "name": "Lonsdale St-Spring St (West)",
+      "lat": -37.80999341,
+      "lng": 144.97227587,
+      "count": 34,
+      "avg": 476,
+      "vs_pct": -93,
+      "peak_hour": 12
     },
     {
       "id": "50",
       "name": "Faraday St-Lygon St (West)",
       "lat": -37.79808192,
       "lng": 144.96721013,
-      "count": 29,
+      "count": 31,
       "avg": 420,
       "vs_pct": -93,
       "peak_hour": 17
@@ -671,10 +671,40 @@
       "name": "COM Pole 1584 - Hammer Hall Entrance",
       "lat": -37.81970749,
       "lng": 144.96795734,
-      "count": 28,
+      "count": 29,
       "avg": 896,
       "vs_pct": -97,
       "peak_hour": 12
+    },
+    {
+      "id": "164",
+      "name": "I-Hub 526 La Trobe Street (Footpath)",
+      "lat": -37.813005,
+      "lng": 144.95160411,
+      "count": 24,
+      "avg": 245,
+      "vs_pct": -90,
+      "peak_hour": 17
+    },
+    {
+      "id": "52",
+      "name": "Elizabeth St-Lonsdale St (South)",
+      "lat": -37.81252157,
+      "lng": 144.9619401,
+      "count": 24,
+      "avg": 577,
+      "vs_pct": -96,
+      "peak_hour": 13
+    },
+    {
+      "id": "9",
+      "name": "Southern Cross Station",
+      "lat": -37.81982992,
+      "lng": 144.95102555,
+      "count": 22,
+      "avg": 866,
+      "vs_pct": -97,
+      "peak_hour": 8
     },
     {
       "id": "137",
@@ -687,34 +717,14 @@
       "peak_hour": 8
     },
     {
-      "id": "164",
-      "name": "I-Hub 526 La Trobe Street (Footpath)",
-      "lat": -37.813005,
-      "lng": 144.95160411,
+      "id": "179",
+      "name": "61-67 Power Street Southbank",
+      "lat": -37.82392385,
+      "lng": 144.96299677,
       "count": 21,
-      "avg": 245,
-      "vs_pct": -91,
+      "avg": 166,
+      "vs_pct": -87,
       "peak_hour": 17
-    },
-    {
-      "id": "9",
-      "name": "Southern Cross Station",
-      "lat": -37.81982992,
-      "lng": 144.95102555,
-      "count": 21,
-      "avg": 866,
-      "vs_pct": -98,
-      "peak_hour": 8
-    },
-    {
-      "id": "52",
-      "name": "Elizabeth St-Lonsdale St (South)",
-      "lat": -37.81252157,
-      "lng": 144.9619401,
-      "count": 19,
-      "avg": 577,
-      "vs_pct": -97,
-      "peak_hour": 13
     },
     {
       "id": "11",
@@ -731,19 +741,9 @@
       "name": "484 Spencer Street",
       "lat": -37.80896733,
       "lng": 144.94931703,
-      "count": 16,
+      "count": 17,
       "avg": 154,
-      "vs_pct": -90,
-      "peak_hour": 17
-    },
-    {
-      "id": "179",
-      "name": "61-67 Power Street Southbank",
-      "lat": -37.82392385,
-      "lng": 144.96299677,
-      "count": 14,
-      "avg": 166,
-      "vs_pct": -92,
+      "vs_pct": -89,
       "peak_hour": 17
     },
     {
@@ -751,9 +751,39 @@
       "name": "QV Market-Peel St",
       "lat": -37.80606888,
       "lng": 144.95644692,
-      "count": 14,
+      "count": 16,
       "avg": 282,
-      "vs_pct": -95,
+      "vs_pct": -94,
+      "peak_hour": 12
+    },
+    {
+      "id": "10",
+      "name": "Victoria Point",
+      "lat": -37.81876474,
+      "lng": 144.94710545,
+      "count": 12,
+      "avg": 138,
+      "vs_pct": -91,
+      "peak_hour": 12
+    },
+    {
+      "id": "12",
+      "name": "New Quay",
+      "lat": -37.81457988,
+      "lng": 144.94292398,
+      "count": 12,
+      "avg": 305,
+      "vs_pct": -96,
+      "peak_hour": 17
+    },
+    {
+      "id": "87",
+      "name": "Errol St (West)",
+      "lat": -37.80454949,
+      "lng": 144.94921863,
+      "count": 11,
+      "avg": 288,
+      "vs_pct": -96,
       "peak_hour": 12
     },
     {
@@ -767,14 +797,24 @@
       "peak_hour": 18
     },
     {
-      "id": "12",
-      "name": "New Quay",
-      "lat": -37.81457988,
-      "lng": 144.94292398,
+      "id": "167",
+      "name": "I-Hub 526 La Trobe Street (Crossing)",
+      "lat": -37.81304149,
+      "lng": 144.95155955,
       "count": 11,
-      "avg": 305,
-      "vs_pct": -96,
+      "avg": 77,
+      "vs_pct": -86,
       "peak_hour": 17
+    },
+    {
+      "id": "69",
+      "name": "Flinders Ln -Degraves St (Crossing)",
+      "lat": -37.81687226,
+      "lng": 144.96559144,
+      "count": 11,
+      "avg": 282,
+      "vs_pct": -96,
+      "peak_hour": 12
     },
     {
       "id": "139",
@@ -787,23 +827,13 @@
       "peak_hour": 17
     },
     {
-      "id": "87",
-      "name": "Errol St (West)",
-      "lat": -37.80454949,
-      "lng": 144.94921863,
-      "count": 10,
-      "avg": 288,
-      "vs_pct": -97,
-      "peak_hour": 12
-    },
-    {
-      "id": "167",
-      "name": "I-Hub 526 La Trobe Street (Crossing)",
-      "lat": -37.81304149,
-      "lng": 144.95155955,
-      "count": 10,
-      "avg": 77,
-      "vs_pct": -87,
+      "id": "161",
+      "name": "Birrarung Marr - COM - Pole 1109",
+      "lat": -37.81851276,
+      "lng": 144.97131336,
+      "count": 11,
+      "avg": 305,
+      "vs_pct": -96,
       "peak_hour": 17
     },
     {
@@ -817,26 +847,6 @@
       "peak_hour": 12
     },
     {
-      "id": "161",
-      "name": "Birrarung Marr - COM - Pole 1109",
-      "lat": -37.81851276,
-      "lng": 144.97131336,
-      "count": 10,
-      "avg": 305,
-      "vs_pct": -97,
-      "peak_hour": 17
-    },
-    {
-      "id": "10",
-      "name": "Victoria Point",
-      "lat": -37.81876474,
-      "lng": 144.94710545,
-      "count": 9,
-      "avg": 138,
-      "vs_pct": -93,
-      "peak_hour": 12
-    },
-    {
       "id": "68",
       "name": "Flinders Ln -Degraves St (North)",
       "lat": -37.8168479,
@@ -847,14 +857,14 @@
       "peak_hour": 12
     },
     {
-      "id": "69",
-      "name": "Flinders Ln -Degraves St (Crossing)",
-      "lat": -37.81687226,
-      "lng": 144.96559144,
-      "count": 9,
-      "avg": 282,
-      "vs_pct": -97,
-      "peak_hour": 12
+      "id": "165",
+      "name": "475 Spencer Street",
+      "lat": -37.80953359,
+      "lng": 144.94939004,
+      "count": 8,
+      "avg": 124,
+      "vs_pct": -94,
+      "peak_hour": 21
     },
     {
       "id": "118",
@@ -865,16 +875,6 @@
       "avg": 40,
       "vs_pct": -82,
       "peak_hour": 17
-    },
-    {
-      "id": "165",
-      "name": "475 Spencer Street",
-      "lat": -37.80953359,
-      "lng": 144.94939004,
-      "count": 7,
-      "avg": 124,
-      "vs_pct": -94,
-      "peak_hour": 21
     },
     {
       "id": "75",
@@ -907,6 +907,16 @@
       "peak_hour": 17
     },
     {
+      "id": "71",
+      "name": "Westwood Place",
+      "lat": -37.81235775,
+      "lng": 144.97136962,
+      "count": 5,
+      "avg": 84,
+      "vs_pct": -94,
+      "peak_hour": 17
+    },
+    {
       "id": "46",
       "name": "Pelham St (South)",
       "lat": -37.80240719,
@@ -915,16 +925,6 @@
       "avg": 168,
       "vs_pct": -97,
       "peak_hour": 13
-    },
-    {
-      "id": "71",
-      "name": "Westwood Place",
-      "lat": -37.81235775,
-      "lng": 144.97136962,
-      "count": 4,
-      "avg": 84,
-      "vs_pct": -95,
-      "peak_hour": 17
     },
     {
       "id": "18",
