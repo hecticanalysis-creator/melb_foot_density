@@ -1,108 +1,108 @@
 {
-  "fetched_at": "2026-04-24T23:30:18Z",
-  "fetched_at_local": "25 Apr 2026 09:30",
-  "ref_date": "2026-04-23",
-  "current_hour": 23,
+  "fetched_at": "2026-04-25T00:00:18Z",
+  "fetched_at_local": "25 Apr 2026 10:00",
+  "ref_date": "2026-04-24",
+  "current_hour": 0,
   "sensor_count": 87,
   "total_now": 30842,
-  "total_avg": 23427,
-  "vs_total_pct": 32,
+  "total_avg": 13855,
+  "vs_total_pct": 123,
   "hourly_curve": [
     {
       "hour": 0,
-      "total": 3836
+      "total": 5782
     },
     {
       "hour": 1,
-      "total": 2302
+      "total": 3310
     },
     {
       "hour": 2,
-      "total": 1430
+      "total": 1892
     },
     {
       "hour": 3,
-      "total": 1098
+      "total": 1264
     },
     {
       "hour": 4,
-      "total": 920
+      "total": 0
     },
     {
       "hour": 5,
-      "total": 2517
+      "total": 0
     },
     {
       "hour": 6,
-      "total": 9774
+      "total": 0
     },
     {
       "hour": 7,
-      "total": 26176
+      "total": 0
     },
     {
       "hour": 8,
-      "total": 55462
+      "total": 0
     },
     {
       "hour": 9,
-      "total": 45323
+      "total": 0
     },
     {
       "hour": 10,
-      "total": 41792
+      "total": 0
     },
     {
       "hour": 11,
-      "total": 49262
+      "total": 0
     },
     {
       "hour": 12,
-      "total": 73527
+      "total": 0
     },
     {
       "hour": 13,
-      "total": 72773
+      "total": 0
     },
     {
       "hour": 14,
-      "total": 59575
+      "total": 0
     },
     {
       "hour": 15,
-      "total": 60444
+      "total": 0
     },
     {
       "hour": 16,
-      "total": 63658
+      "total": 0
     },
     {
       "hour": 17,
-      "total": 80620
+      "total": 0
     },
     {
       "hour": 18,
-      "total": 58285
+      "total": 0
     },
     {
       "hour": 19,
-      "total": 43052
+      "total": 0
     },
     {
       "hour": 20,
-      "total": 35728
+      "total": 0
     },
     {
       "hour": 21,
-      "total": 28936
+      "total": 0
     },
     {
       "hour": 22,
-      "total": 26234
+      "total": 0
     },
     {
       "hour": 23,
-      "total": 10770
+      "total": 0
     }
   ],
   "locations": [
@@ -112,9 +112,9 @@
       "lat": -37.81668634,
       "lng": 144.96689733,
       "count": 1720,
-      "avg": 1334,
-      "vs_pct": 29,
-      "peak_hour": 11
+      "avg": 721,
+      "vs_pct": 139,
+      "peak_hour": null
     },
     {
       "id": "3",
@@ -122,9 +122,9 @@
       "lat": -37.81101524,
       "lng": 144.96429485,
       "count": 1517,
-      "avg": 1203,
-      "vs_pct": 26,
-      "peak_hour": 19
+      "avg": 749,
+      "vs_pct": 103,
+      "peak_hour": 0
     },
     {
       "id": "30",
@@ -132,9 +132,9 @@
       "lat": -37.8112185,
       "lng": 144.96656806,
       "count": 1418,
-      "avg": 876,
-      "vs_pct": 62,
-      "peak_hour": 18
+      "avg": 587,
+      "vs_pct": 142,
+      "peak_hour": 0
     },
     {
       "id": "4",
@@ -142,9 +142,9 @@
       "lat": -37.81487988,
       "lng": 144.9660878,
       "count": 1361,
-      "avg": null,
-      "vs_pct": null,
-      "peak_hour": 12
+      "avg": 967,
+      "vs_pct": 41,
+      "peak_hour": 0
     },
     {
       "id": "181",
@@ -152,9 +152,9 @@
       "lat": -37.81009465,
       "lng": 144.96143149,
       "count": 1085,
-      "avg": 908,
-      "vs_pct": 19,
-      "peak_hour": 18
+      "avg": 612,
+      "vs_pct": 77,
+      "peak_hour": 0
     },
     {
       "id": "36",
@@ -162,9 +162,9 @@
       "lat": -37.81652527,
       "lng": 144.96121062,
       "count": 1001,
-      "avg": 313,
-      "vs_pct": 220,
-      "peak_hour": 12
+      "avg": 266,
+      "vs_pct": 276,
+      "peak_hour": 0
     },
     {
       "id": "6",
@@ -172,9 +172,9 @@
       "lat": -37.81911705,
       "lng": 144.96558255,
       "count": 958,
-      "avg": 793,
-      "vs_pct": 21,
-      "peak_hour": 17
+      "avg": 474,
+      "vs_pct": 102,
+      "peak_hour": 0
     },
     {
       "id": "185",
@@ -182,9 +182,9 @@
       "lat": -37.81374643,
       "lng": 144.96276183,
       "count": 939,
-      "avg": 624,
-      "vs_pct": 50,
-      "peak_hour": 13
+      "avg": 396,
+      "vs_pct": 137,
+      "peak_hour": 0
     },
     {
       "id": "182",
@@ -192,9 +192,9 @@
       "lat": -37.81627451,
       "lng": 144.95550503,
       "count": 894,
-      "avg": 400,
-      "vs_pct": 124,
-      "peak_hour": 12
+      "avg": null,
+      "vs_pct": null,
+      "peak_hour": 0
     },
     {
       "id": "84",
@@ -202,9 +202,9 @@
       "lat": -37.81798049,
       "lng": 144.96503383,
       "count": 893,
-      "avg": 702,
-      "vs_pct": 27,
-      "peak_hour": 17
+      "avg": 405,
+      "vs_pct": 120,
+      "peak_hour": 0
     },
     {
       "id": "45",
@@ -212,9 +212,9 @@
       "lat": -37.81414075,
       "lng": 144.96609379,
       "count": 882,
-      "avg": 795,
-      "vs_pct": 11,
-      "peak_hour": 17
+      "avg": 530,
+      "vs_pct": 66,
+      "peak_hour": 0
     },
     {
       "id": "5",
@@ -222,9 +222,9 @@
       "lat": -37.81874249,
       "lng": 144.96787656,
       "count": 865,
-      "avg": 760,
-      "vs_pct": 14,
-      "peak_hour": 19
+      "avg": 387,
+      "vs_pct": 124,
+      "peak_hour": 0
     },
     {
       "id": "63",
@@ -232,9 +232,9 @@
       "lat": -37.81333081,
       "lng": 144.96675571,
       "count": 846,
-      "avg": 605,
-      "vs_pct": 40,
-      "peak_hour": 13
+      "avg": 450,
+      "vs_pct": 88,
+      "peak_hour": 0
     },
     {
       "id": "19",
@@ -242,9 +242,9 @@
       "lat": -37.81237202,
       "lng": 144.96550671,
       "count": 839,
-      "avg": 720,
-      "vs_pct": 17,
-      "peak_hour": 18
+      "avg": 451,
+      "vs_pct": 86,
+      "peak_hour": 0
     },
     {
       "id": "47",
@@ -252,9 +252,9 @@
       "lat": -37.81258467,
       "lng": 144.9625775,
       "count": 745,
-      "avg": 541,
-      "vs_pct": 38,
-      "peak_hour": 17
+      "avg": 353,
+      "vs_pct": 111,
+      "peak_hour": 0
     },
     {
       "id": "35",
@@ -262,9 +262,9 @@
       "lat": -37.82018685,
       "lng": 144.96508508,
       "count": 701,
-      "avg": 616,
-      "vs_pct": 14,
-      "peak_hour": 17
+      "avg": 304,
+      "vs_pct": 131,
+      "peak_hour": 0
     },
     {
       "id": "66",
@@ -272,9 +272,9 @@
       "lat": -37.81057846,
       "lng": 144.96444294,
       "count": 680,
-      "avg": 836,
-      "vs_pct": -19,
-      "peak_hour": 17
+      "avg": 372,
+      "vs_pct": 83,
+      "peak_hour": 0
     },
     {
       "id": "59",
@@ -282,9 +282,9 @@
       "lat": -37.80825648,
       "lng": 144.96304859,
       "count": 669,
-      "avg": 487,
-      "vs_pct": 37,
-      "peak_hour": 12
+      "avg": 303,
+      "vs_pct": 121,
+      "peak_hour": 0
     },
     {
       "id": "20",
@@ -292,9 +292,9 @@
       "lat": -37.81172914,
       "lng": 144.9682466,
       "count": 653,
-      "avg": 578,
-      "vs_pct": 13,
-      "peak_hour": 18
+      "avg": 351,
+      "vs_pct": 86,
+      "peak_hour": 0
     },
     {
       "id": "21",
@@ -302,9 +302,9 @@
       "lat": -37.81267313,
       "lng": 144.96788288,
       "count": 648,
-      "avg": 486,
-      "vs_pct": 33,
-      "peak_hour": 13
+      "avg": null,
+      "vs_pct": null,
+      "peak_hour": 0
     },
     {
       "id": "131",
@@ -312,9 +312,9 @@
       "lat": -37.82009057,
       "lng": 144.95758725,
       "count": 641,
-      "avg": 199,
-      "vs_pct": 222,
-      "peak_hour": 13
+      "avg": 184,
+      "vs_pct": 248,
+      "peak_hour": 0
     },
     {
       "id": "79",
@@ -322,9 +322,9 @@
       "lat": -37.81794046,
       "lng": 144.96616678,
       "count": 634,
-      "avg": 624,
-      "vs_pct": 2,
-      "peak_hour": 17
+      "avg": 303,
+      "vs_pct": 109,
+      "peak_hour": 0
     },
     {
       "id": "24",
@@ -332,9 +332,9 @@
       "lat": -37.81887963,
       "lng": 144.95449198,
       "count": 611,
-      "avg": 495,
-      "vs_pct": 23,
-      "peak_hour": 17
+      "avg": 277,
+      "vs_pct": 121,
+      "peak_hour": 0
     },
     {
       "id": "143",
@@ -342,9 +342,9 @@
       "lat": -37.821728,
       "lng": 144.95557015,
       "count": 493,
-      "avg": 329,
-      "vs_pct": 50,
-      "peak_hour": 18
+      "avg": 209,
+      "vs_pct": 136,
+      "peak_hour": 0
     },
     {
       "id": "184",
@@ -352,9 +352,9 @@
       "lat": -37.81512416,
       "lng": 144.96371988,
       "count": 473,
-      "avg": 379,
-      "vs_pct": 25,
-      "peak_hour": 13
+      "avg": 258,
+      "vs_pct": 83,
+      "peak_hour": 0
     },
     {
       "id": "134",
@@ -362,9 +362,9 @@
       "lat": -37.81694221,
       "lng": 144.95303935,
       "count": 457,
-      "avg": 300,
-      "vs_pct": 52,
-      "peak_hour": 17
+      "avg": 214,
+      "vs_pct": 114,
+      "peak_hour": 0
     },
     {
       "id": "58",
@@ -372,9 +372,9 @@
       "lat": -37.81686075,
       "lng": 144.95358075,
       "count": 452,
-      "avg": 433,
-      "vs_pct": 4,
-      "peak_hour": 8
+      "avg": 270,
+      "vs_pct": 67,
+      "peak_hour": null
     },
     {
       "id": "141",
@@ -382,9 +382,9 @@
       "lat": -37.81997273,
       "lng": 144.95834911,
       "count": 425,
-      "avg": 208,
-      "vs_pct": 104,
-      "peak_hour": 17
+      "avg": 169,
+      "vs_pct": 151,
+      "peak_hour": 0
     },
     {
       "id": "62",
@@ -392,9 +392,9 @@
       "lat": -37.80996494,
       "lng": 144.96216521,
       "count": 417,
-      "avg": 325,
-      "vs_pct": 28,
-      "peak_hour": 17
+      "avg": 213,
+      "vs_pct": 96,
+      "peak_hour": 0
     },
     {
       "id": "162",
@@ -402,9 +402,9 @@
       "lat": -37.80740397,
       "lng": 144.95987909,
       "count": 413,
-      "avg": 287,
-      "vs_pct": 44,
-      "peak_hour": 13
+      "avg": 199,
+      "vs_pct": 108,
+      "peak_hour": 0
     },
     {
       "id": "49",
@@ -412,9 +412,9 @@
       "lat": -37.80730068,
       "lng": 144.95956055,
       "count": 390,
-      "avg": 229,
-      "vs_pct": 70,
-      "peak_hour": 12
+      "avg": 174,
+      "vs_pct": 124,
+      "peak_hour": 0
     },
     {
       "id": "56",
@@ -422,9 +422,9 @@
       "lat": -37.81234775,
       "lng": 144.96153311,
       "count": 368,
-      "avg": 405,
-      "vs_pct": -9,
-      "peak_hour": 13
+      "avg": 218,
+      "vs_pct": 69,
+      "peak_hour": 0
     },
     {
       "id": "53",
@@ -432,9 +432,9 @@
       "lat": -37.81564191,
       "lng": 144.965499,
       "count": 313,
-      "avg": 250,
-      "vs_pct": 25,
-      "peak_hour": 13
+      "avg": 128,
+      "vs_pct": 145,
+      "peak_hour": 0
     },
     {
       "id": "52",
@@ -442,9 +442,9 @@
       "lat": -37.81252157,
       "lng": 144.9619401,
       "count": 305,
-      "avg": 191,
-      "vs_pct": 60,
-      "peak_hour": 13
+      "avg": 113,
+      "vs_pct": 170,
+      "peak_hour": 0
     },
     {
       "id": "133",
@@ -452,9 +452,9 @@
       "lat": -37.81531435,
       "lng": 144.95227769,
       "count": 296,
-      "avg": 275,
-      "vs_pct": 8,
-      "peak_hour": 17
+      "avg": 136,
+      "vs_pct": 118,
+      "peak_hour": 0
     },
     {
       "id": "108",
@@ -462,9 +462,9 @@
       "lat": -37.81295822,
       "lng": 144.95678789,
       "count": 295,
-      "avg": 181,
-      "vs_pct": 63,
-      "peak_hour": 8
+      "avg": 98,
+      "vs_pct": 201,
+      "peak_hour": 1
     },
     {
       "id": "61",
@@ -472,9 +472,9 @@
       "lat": -37.80767455,
       "lng": 144.96309114,
       "count": 259,
-      "avg": 220,
-      "vs_pct": 18,
-      "peak_hour": 12
+      "avg": null,
+      "vs_pct": null,
+      "peak_hour": 0
     },
     {
       "id": "135",
@@ -482,9 +482,9 @@
       "lat": -37.8172861,
       "lng": 144.95319102,
       "count": 252,
-      "avg": 178,
-      "vs_pct": 42,
-      "peak_hour": 17
+      "avg": 166,
+      "vs_pct": 52,
+      "peak_hour": 0
     },
     {
       "id": "2",
@@ -492,9 +492,9 @@
       "lat": -37.81380668,
       "lng": 144.96516718,
       "count": 244,
-      "avg": 231,
-      "vs_pct": 6,
-      "peak_hour": 13
+      "avg": 140,
+      "vs_pct": 74,
+      "peak_hour": 1
     },
     {
       "id": "25",
@@ -502,9 +502,9 @@
       "lat": -37.82401776,
       "lng": 144.95604426,
       "count": 234,
-      "avg": 264,
-      "vs_pct": -11,
-      "peak_hour": 17
+      "avg": 129,
+      "vs_pct": 81,
+      "peak_hour": 0
     },
     {
       "id": "67",
@@ -512,9 +512,9 @@
       "lat": -37.81688755,
       "lng": 144.96562569,
       "count": 231,
-      "avg": 270,
-      "vs_pct": -14,
-      "peak_hour": 12
+      "avg": 136,
+      "vs_pct": 70,
+      "peak_hour": 0
     },
     {
       "id": "23",
@@ -522,9 +522,9 @@
       "lat": -37.81909256,
       "lng": 144.95452748,
       "count": 227,
-      "avg": 160,
-      "vs_pct": 42,
-      "peak_hour": 17
+      "avg": 77,
+      "vs_pct": 195,
+      "peak_hour": 0
     },
     {
       "id": "132",
@@ -532,9 +532,9 @@
       "lat": -37.81267639,
       "lng": 144.95386444,
       "count": 225,
-      "avg": 168,
-      "vs_pct": 34,
-      "peak_hour": 13
+      "avg": 108,
+      "vs_pct": 108,
+      "peak_hour": 0
     },
     {
       "id": "29",
@@ -542,9 +542,9 @@
       "lat": -37.8199817,
       "lng": 144.96872865,
       "count": 208,
-      "avg": 130,
-      "vs_pct": 60,
-      "peak_hour": 12
+      "avg": 56,
+      "vs_pct": 271,
+      "peak_hour": 0
     },
     {
       "id": "142",
@@ -552,9 +552,9 @@
       "lat": -37.81970749,
       "lng": 144.96795734,
       "count": 197,
-      "avg": 228,
-      "vs_pct": -14,
-      "peak_hour": 17
+      "avg": 76,
+      "vs_pct": 159,
+      "peak_hour": 0
     },
     {
       "id": "117",
@@ -562,9 +562,9 @@
       "lat": -37.81629332,
       "lng": 144.97090877,
       "count": 166,
-      "avg": 219,
-      "vs_pct": -24,
-      "peak_hour": 17
+      "avg": 75,
+      "vs_pct": 121,
+      "peak_hour": 0
     },
     {
       "id": "109",
@@ -572,9 +572,9 @@
       "lat": -37.81193681,
       "lng": 144.95621105,
       "count": 153,
-      "avg": 99,
-      "vs_pct": 55,
-      "peak_hour": 17
+      "avg": 54,
+      "vs_pct": 183,
+      "peak_hour": 0
     },
     {
       "id": "17",
@@ -582,9 +582,9 @@
       "lat": -37.81362543,
       "lng": 144.97323591,
       "count": 142,
-      "avg": 127,
-      "vs_pct": 12,
-      "peak_hour": 13
+      "avg": 60,
+      "vs_pct": 137,
+      "peak_hour": 0
     },
     {
       "id": "11",
@@ -592,9 +592,9 @@
       "lat": -37.81564989,
       "lng": 144.93970694,
       "count": 134,
-      "avg": 44,
-      "vs_pct": 205,
-      "peak_hour": 17
+      "avg": 19,
+      "vs_pct": 605,
+      "peak_hour": 0
     },
     {
       "id": "107",
@@ -602,9 +602,9 @@
       "lat": -37.81246271,
       "lng": 144.95690188,
       "count": 134,
-      "avg": 74,
-      "vs_pct": 81,
-      "peak_hour": 13
+      "avg": 60,
+      "vs_pct": 123,
+      "peak_hour": 0
     },
     {
       "id": "31",
@@ -612,9 +612,9 @@
       "lat": -37.80169681,
       "lng": 144.96658911,
       "count": 127,
-      "avg": 226,
-      "vs_pct": -44,
-      "peak_hour": 20
+      "avg": 98,
+      "vs_pct": 30,
+      "peak_hour": 0
     },
     {
       "id": "77",
@@ -622,9 +622,9 @@
       "lat": -37.81441438,
       "lng": 144.94433026,
       "count": 115,
-      "avg": 70,
-      "vs_pct": 64,
-      "peak_hour": 22
+      "avg": 33,
+      "vs_pct": 248,
+      "peak_hour": 0
     },
     {
       "id": "37",
@@ -632,9 +632,9 @@
       "lat": -37.80107122,
       "lng": 144.96704554,
       "count": 113,
-      "avg": 130,
-      "vs_pct": -13,
-      "peak_hour": 13
+      "avg": 82,
+      "vs_pct": 38,
+      "peak_hour": 0
     },
     {
       "id": "43",
@@ -642,9 +642,9 @@
       "lat": -37.79844526,
       "lng": 144.96411782,
       "count": 112,
-      "avg": 44,
-      "vs_pct": 155,
-      "peak_hour": 17
+      "avg": 23,
+      "vs_pct": 387,
+      "peak_hour": 0
     },
     {
       "id": "51",
@@ -652,9 +652,9 @@
       "lat": -37.80841815,
       "lng": 144.95906316,
       "count": 106,
-      "avg": 95,
-      "vs_pct": 12,
-      "peak_hour": 12
+      "avg": 81,
+      "vs_pct": 31,
+      "peak_hour": 0
     },
     {
       "id": "44",
@@ -662,9 +662,9 @@
       "lat": -37.79698741,
       "lng": 144.96441306,
       "count": 102,
-      "avg": 32,
-      "vs_pct": 219,
-      "peak_hour": 17
+      "avg": 22,
+      "vs_pct": 364,
+      "peak_hour": 0
     },
     {
       "id": "72",
@@ -672,9 +672,9 @@
       "lat": -37.81726338,
       "lng": 144.96872809,
       "count": 99,
-      "avg": 235,
-      "vs_pct": -58,
-      "peak_hour": 17
+      "avg": 59,
+      "vs_pct": 68,
+      "peak_hour": 0
     },
     {
       "id": "179",
@@ -682,9 +682,9 @@
       "lat": -37.82392385,
       "lng": 144.96299677,
       "count": 76,
-      "avg": 65,
-      "vs_pct": 17,
-      "peak_hour": 17
+      "avg": 30,
+      "vs_pct": 153,
+      "peak_hour": 0
     },
     {
       "id": "40",
@@ -692,9 +692,9 @@
       "lat": -37.80999341,
       "lng": 144.97227587,
       "count": 75,
-      "avg": 92,
-      "vs_pct": -18,
-      "peak_hour": 12
+      "avg": 54,
+      "vs_pct": 39,
+      "peak_hour": 0
     },
     {
       "id": "9",
@@ -702,9 +702,9 @@
       "lat": -37.81982992,
       "lng": 144.95102555,
       "count": 73,
-      "avg": 62,
-      "vs_pct": 18,
-      "peak_hour": 8
+      "avg": 30,
+      "vs_pct": 143,
+      "peak_hour": 0
     },
     {
       "id": "27",
@@ -712,9 +712,9 @@
       "lat": -37.80606888,
       "lng": 144.95644692,
       "count": 72,
-      "avg": 71,
-      "vs_pct": 1,
-      "peak_hour": 12
+      "avg": 42,
+      "vs_pct": 71,
+      "peak_hour": 0
     },
     {
       "id": "161",
@@ -722,9 +722,9 @@
       "lat": -37.81851276,
       "lng": 144.97131336,
       "count": 69,
-      "avg": 314,
-      "vs_pct": -78,
-      "peak_hour": 8
+      "avg": 20,
+      "vs_pct": 245,
+      "peak_hour": 0
     },
     {
       "id": "139",
@@ -732,9 +732,9 @@
       "lat": -37.81959923,
       "lng": 144.9632832,
       "count": 64,
-      "avg": 30,
-      "vs_pct": 113,
-      "peak_hour": 8
+      "avg": 20,
+      "vs_pct": 220,
+      "peak_hour": 1
     },
     {
       "id": "164",
@@ -742,9 +742,9 @@
       "lat": -37.813005,
       "lng": 144.95160411,
       "count": 60,
-      "avg": 78,
-      "vs_pct": -23,
-      "peak_hour": 17
+      "avg": 41,
+      "vs_pct": 46,
+      "peak_hour": 0
     },
     {
       "id": "50",
@@ -752,9 +752,9 @@
       "lat": -37.79808192,
       "lng": 144.96721013,
       "count": 56,
-      "avg": 86,
-      "vs_pct": -35,
-      "peak_hour": 19
+      "avg": 39,
+      "vs_pct": 44,
+      "peak_hour": 0
     },
     {
       "id": "70",
@@ -762,9 +762,9 @@
       "lat": -37.80456984,
       "lng": 144.94946228,
       "count": 46,
-      "avg": 182,
-      "vs_pct": -75,
-      "peak_hour": 17
+      "avg": 17,
+      "vs_pct": 171,
+      "peak_hour": 0
     },
     {
       "id": "12",
@@ -772,9 +772,9 @@
       "lat": -37.81457988,
       "lng": 144.94292398,
       "count": 46,
-      "avg": 26,
-      "vs_pct": 77,
-      "peak_hour": 17
+      "avg": 12,
+      "vs_pct": 283,
+      "peak_hour": 0
     },
     {
       "id": "71",
@@ -784,7 +784,7 @@
       "count": 44,
       "avg": 10,
       "vs_pct": 340,
-      "peak_hour": 17
+      "peak_hour": 1
     },
     {
       "id": "68",
@@ -792,9 +792,9 @@
       "lat": -37.8168479,
       "lng": 144.96559789,
       "count": 34,
-      "avg": 116,
-      "vs_pct": -71,
-      "peak_hour": 12
+      "avg": 18,
+      "vs_pct": 89,
+      "peak_hour": 0
     },
     {
       "id": "42",
@@ -802,9 +802,9 @@
       "lat": -37.80008566,
       "lng": 144.96386412,
       "count": 32,
-      "avg": 31,
-      "vs_pct": 3,
-      "peak_hour": 13
+      "avg": null,
+      "vs_pct": null,
+      "peak_hour": 0
     },
     {
       "id": "87",
@@ -812,9 +812,9 @@
       "lat": -37.80454949,
       "lng": 144.94921863,
       "count": 26,
-      "avg": 36,
-      "vs_pct": -28,
-      "peak_hour": 18
+      "avg": 13,
+      "vs_pct": 100,
+      "peak_hour": 0
     },
     {
       "id": "69",
@@ -822,9 +822,9 @@
       "lat": -37.81687226,
       "lng": 144.96559144,
       "count": 26,
-      "avg": 35,
-      "vs_pct": -26,
-      "peak_hour": 12
+      "avg": 18,
+      "vs_pct": 44,
+      "peak_hour": 2
     },
     {
       "id": "10",
@@ -832,9 +832,9 @@
       "lat": -37.81876474,
       "lng": 144.94710545,
       "count": 21,
-      "avg": 24,
-      "vs_pct": -12,
-      "peak_hour": 12
+      "avg": 15,
+      "vs_pct": 40,
+      "peak_hour": 0
     },
     {
       "id": "166",
@@ -842,9 +842,9 @@
       "lat": -37.80896733,
       "lng": 144.94931703,
       "count": 16,
-      "avg": 11,
-      "vs_pct": 45,
-      "peak_hour": 17
+      "avg": 4,
+      "vs_pct": 300,
+      "peak_hour": 0
     },
     {
       "id": "118",
@@ -852,9 +852,9 @@
       "lat": -37.81632783,
       "lng": 144.97090512,
       "count": 15,
-      "avg": 28,
-      "vs_pct": -46,
-      "peak_hour": 17
+      "avg": 11,
+      "vs_pct": 36,
+      "peak_hour": 0
     },
     {
       "id": "167",
@@ -862,9 +862,9 @@
       "lat": -37.81304149,
       "lng": 144.95155955,
       "count": 15,
-      "avg": 18,
-      "vs_pct": -17,
-      "peak_hour": 17
+      "avg": 11,
+      "vs_pct": 36,
+      "peak_hour": 0
     },
     {
       "id": "18",
@@ -872,9 +872,9 @@
       "lat": -37.81344862,
       "lng": 144.97305353,
       "count": 14,
-      "avg": 10,
-      "vs_pct": 40,
-      "peak_hour": 8
+      "avg": 9,
+      "vs_pct": 56,
+      "peak_hour": 0
     },
     {
       "id": "85",
@@ -882,9 +882,9 @@
       "lat": -37.79432415,
       "lng": 144.92973378,
       "count": 14,
-      "avg": 22,
-      "vs_pct": -36,
-      "peak_hour": 8
+      "avg": 8,
+      "vs_pct": 75,
+      "peak_hour": 2
     },
     {
       "id": "136",
@@ -892,9 +892,9 @@
       "lat": -37.8184141,
       "lng": 144.97357915,
       "count": 14,
-      "avg": 60,
-      "vs_pct": -77,
-      "peak_hour": 17
+      "avg": 2,
+      "vs_pct": 600,
+      "peak_hour": 2
     },
     {
       "id": "165",
@@ -902,9 +902,9 @@
       "lat": -37.80953359,
       "lng": 144.94939004,
       "count": 11,
-      "avg": 15,
-      "vs_pct": -27,
-      "peak_hour": 17
+      "avg": 8,
+      "vs_pct": 38,
+      "peak_hour": 0
     },
     {
       "id": "8",
@@ -912,9 +912,9 @@
       "lat": -37.82293543,
       "lng": 144.9471751,
       "count": 9,
-      "avg": 14,
-      "vs_pct": -36,
-      "peak_hour": 17
+      "avg": 4,
+      "vs_pct": 125,
+      "peak_hour": 0
     },
     {
       "id": "86",
@@ -922,9 +922,9 @@
       "lat": -37.80309992,
       "lng": 144.94908064,
       "count": 9,
-      "avg": 14,
-      "vs_pct": -36,
-      "peak_hour": 12
+      "avg": 4,
+      "vs_pct": 125,
+      "peak_hour": 0
     },
     {
       "id": "75",
@@ -932,9 +932,9 @@
       "lat": -37.81515276,
       "lng": 144.97467661,
       "count": 8,
-      "avg": 12,
-      "vs_pct": -33,
-      "peak_hour": 17
+      "avg": 5,
+      "vs_pct": 60,
+      "peak_hour": 0
     },
     {
       "id": "76",
@@ -942,9 +942,9 @@
       "lat": -37.79453803,
       "lng": 144.93036194,
       "count": 8,
-      "avg": 16,
-      "vs_pct": -50,
-      "peak_hour": 15
+      "avg": 7,
+      "vs_pct": 14,
+      "peak_hour": 0
     },
     {
       "id": "39",
@@ -952,9 +952,9 @@
       "lat": -37.81379749,
       "lng": 144.96995745,
       "count": 5,
-      "avg": 8,
-      "vs_pct": -38,
-      "peak_hour": 12
+      "avg": 4,
+      "vs_pct": 25,
+      "peak_hour": 0
     },
     {
       "id": "130",
@@ -962,9 +962,9 @@
       "lat": -37.8204637,
       "lng": 144.94126826,
       "count": 4,
-      "avg": 6,
-      "vs_pct": -33,
-      "peak_hour": 12
+      "avg": 2,
+      "vs_pct": 100,
+      "peak_hour": 0
     },
     {
       "id": "180",
@@ -972,9 +972,9 @@
       "lat": -37.79497059,
       "lng": 144.93530329,
       "count": 3,
-      "avg": 4,
-      "vs_pct": -25,
-      "peak_hour": 8
+      "avg": 2,
+      "vs_pct": 50,
+      "peak_hour": 0
     }
   ]
 }
